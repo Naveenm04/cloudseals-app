@@ -1,0 +1,79 @@
+.recommendations-container {
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.top-bar label {
+  font-size: 14px;
+  color: #555;
+}
+
+.top-bar select {
+  padding: 6px 10px;
+  border: 1px solid #004080;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #004080;
+  background-color: #fff;
+}
+
+.actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #004080;
+}
+
+.actions .icon {
+  margin-right: 4px;
+}
+
+.actions .disabled {
+  color: #ccc;
+}
+
+.metrics-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #f1f8fc;
+  padding: 16px;
+  border-radius: 8px;
+  flex: 1;
+  min-width: 200px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.card-title {
+  font-size: 13px;
+  color: #4a4a4a;
+  margin-bottom: 6px;
+}
+
+.card-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #003366;
+}
+
+.card.danger {
+  background: #fff1f2;
+}
+
+.card.danger .card-value {
+  color: #b71c1c;
+}

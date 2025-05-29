@@ -1,0 +1,93 @@
+.dashboard-panel {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 16px 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-panel h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 12px;
+}
+
+th, td {
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.badge {
+  display: inline-block;
+  background-color: #eef;
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin-right: 4px;
+  font-size: 12px;
+}
+
+.recommendations-widget {
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.recommendations-bar {
+  display: flex;
+  height: 24px;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 16px 0;
+}
+
+.recommendations-bar > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  height: 100%;
+  color: #111827;
+}
+
+.savings-bar {
+  background-color: #fee2e2;
+}
+
+.remaining-bar {
+  background-color: #ffffff;
+  color: #6b7280;
+}
+
+.card-group {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.card {
+  flex: 1;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #f9fafb;
+  text-align: center;
+}
+
+.card.cost {
+  background-color: #f0fdf4;
+}
+
+.card.security {
+  background-color: #fefce8;
+}
+
+.card.critical {
+  background-color: #fef2f2;
+}
