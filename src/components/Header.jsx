@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import './Header.css';
 
-const Header = ({ onRegisterClick }) => {
+const Header = () => {
   return (
     <header className="header">
       <div className="logo-section">
@@ -11,14 +11,18 @@ const Header = ({ onRegisterClick }) => {
         <span className="logo-text">CloudSeals</span>
       </div>
       <nav className="nav-links">
-        <Link to="/docs">Docs</Link>
-        <Link to="/pricing">Pricing</Link>
-        <Link to="/about">About</Link>
+        <Link to="/docs">Solutions</Link>
+        <Link to="/pricing">Services</Link>
+        <Link to="/about">Company</Link>
+        <Link to="/about">Case Studies</Link>
       </nav>
       <div className="header-actions">
-        <button onClick={onRegisterClick} className="get-started-button">
-          Register
-        </button>
+        <Link to="/signin">
+          <button className="get-started-button">Get Started</button>
+        </Link>
+        <Link to="/signup">
+          <button className="get-started-button">Register</button>
+        </Link>
       </div>
     </header>
   );
