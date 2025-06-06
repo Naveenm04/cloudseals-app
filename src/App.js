@@ -3,15 +3,15 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainDashboard from './pages/MainDashboard';
 import SignUpForm from './components/Auth/SignUpForm';
 import SignInForm from './components/Auth/SignInForm';
-import Recommendations from './pages/Recommendations';
-import Resources from './pages/Resources';
-import Pools from './pages/Pools';
-import SharedEnvironments from './pages/SharedEnvironments';
-import CostExplorer from './pages/CostExplorer';
-import CostMap from './pages/CostMap';
-import FinOpsPortal from './pages/FinOpsPortal';
+// import Recommendations from './pages/Recommendations';
+// import Resources from './pages/Resources';
+// import Pools from './pages/Pools';
+// import SharedEnvironments from './pages/SharedEnvironments';
+// import CostExplorer from './pages/CostExplorer';
+// import CostMap from './pages/CostMap';
+// import FinOpsPortal from './pages/FinOpsPortal';
 import { ThemeProvider } from './context/ThemeContext';
-import Header from './components/Header';
+// import Header from './components/Header';
 
 function App() {
   const [showSignUp, setShowSignUp] = useState(false);
