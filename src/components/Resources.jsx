@@ -1,9 +1,8 @@
 import React from 'react';
 import ResourcesDashboard from './ResourcesDashboard/ResourcesDashboard';
 import ExpensesChart from '../components/ExpensesChart/ExpensesChart';
-// import ExpenseChart from './components/ExpenseChart';
-// import ExpenseChart from './ExpenseChart';
-
+// import ResourceUsageTable from "./ResourceTable/ResourceTable";
+import ResourceTable from './ResourceTable/ResourceTable';
 
 
 const Resources = () => {
@@ -23,6 +22,14 @@ const Resources = () => {
          <ExpensesChart />
         </div>
       </div>
+
+      
+       <div className="dashboard-container">
+        <div className="dashboard-columns">
+         <ResourceTable />
+        </div>
+      </div>
+
 
       {/* Row 2: Organization and Resource Expenses */}
     </div>

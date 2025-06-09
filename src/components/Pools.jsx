@@ -1,36 +1,31 @@
-// src/components/Dashboard.jsx
-import React from 'react';
-import ModelTable from './ModelTable';
-import TaskTable from './TaskTable';
-// import OrganizationExpenses from './OrganizationExpenses';
-import OrganizationExpenses from './OrganizationExpenses';
-import TopResourceExpenses from './TopResourceExpenses';
-import '../styles/Dashboard.css';
-import RecommendationsWidget from './RecommendationsWidget';
-import ResourceTable from './ResourceTable';
-import Recommendations from './Recommendations/Recommendations';
-import SecuritySummary from './SecuritySummary/SecuritySummary';
-import './DashboardWidget.css';
+import React, { useState } from 'react';
+import OrganizationOverview from './OrganizationOverview/OrganizationOverview';
+import AssignmentRulesTable from './AssignmentRules/AssignmentRulesTable';
 
-const Dashboard = () => {
+const Resources = () => {
+  const [showAssignmentRules, setShowAssignmentRules] = useState(false);
+
+  const handleShowRules = () => {
+    setShowAssignmentRules(true);
+  };
+
+  const handleBackToOverview = () => {
+    setShowAssignmentRules(false);
+  };
+
   return (
     <div className="dashboard-wrapper">
-      {/* Row 1: Models and Tasks */}
       <div className="dashboard-container">
         <div className="dashboard-columns">
-          <Recommendations/>
+          {showAssignmentRules ? (
+            <AssignmentRulesTable onBack={handleBackToOverview} />
+          ) : (
+            <OrganizationOverview onConfigureRules={handleShowRules} />
+          )}
         </div>
       </div>
-
-       <div className="dashboard-container">
-        <div className="dashboard-columns">
-        <SecuritySummary/>
-        </div>
-      </div>
-
-      {/* Row 2: Organization and Resource Expenses */}
     </div>
   );
 };
 
-export default Dashboard;
+export default Resources;

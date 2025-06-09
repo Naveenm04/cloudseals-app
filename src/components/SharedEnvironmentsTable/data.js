@@ -1,0 +1,38 @@
+export const environments = [
+  {
+    name: 'dev-1',
+    type: 'QA stand',
+    status: 'IN USE',
+    user: 'Harry Russell',
+    until: 'Infinite',
+    tickets: ['NGUI-1242', 'NGUI-3214'],
+    software: 'SunWare 1.3.423-integration',
+  },
+  {
+    name: 'dev-2',
+    type: 'QA stand',
+    status: 'IN USE',
+    user: 'Demo User',
+    until: 'Infinite',
+    tickets: ['TCS-1674', 'TCS-2161'],
+    software: 'SunWare 1.3.424-feature/sunrise_control',
+  },
+  {
+    name: 'feature-1',
+    type: 'Dev stand',
+    status: 'AVAILABLE',
+    user: '',
+    until: '',
+    tickets: ['TCS-2214'],
+    software: 'SunWare 1.3.232-hotfix/support-fix',
+  },
+  {
+    name: 'feature-2',
+    type: 'Dev stand',
+    status: 'AVAILABLE',
+    user: '',
+    until: '',
+    tickets: ['NGUI-2617', 'NGUI-2600', 'NGUI-2620', 'TCS-1355', 'TCS-1558'],
+    software: 'SunWare 1.2.162-master',
+  },
+];

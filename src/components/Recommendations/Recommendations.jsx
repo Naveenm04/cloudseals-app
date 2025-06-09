@@ -1,9 +1,24 @@
 // src/components/Recommendations/Recommendations.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import './Recommendations.css';
 import DataSourceDropdown from './DataSourceDropdown';
 
 const Recommendations = () => {
+  const [isForceCheckDisabled, setIsForceCheckDisabled] = useState(true);
+
+  const handleArchiveClick = () => {
+    console.log("ARCHIVE triggered");
+    // Add your actual archive logic here
+    alert("Archived successfully.");
+  };
+
+  const handleForceCheckClick = () => {
+    if (isForceCheckDisabled) return;
+    console.log("FORCE CHECK triggered");
+    // Add your actual force check logic here
+    alert("Force check started.");
+  };
+
   return (
     <div className="recommendations-container">
       <h2>Recommendations</h2>
@@ -12,8 +27,16 @@ const Recommendations = () => {
         <label htmlFor="data-source">Data sources</label>
         <DataSourceDropdown />
         <div className="actions">
-          <span className="icon">⟳</span> ARCHIVE
-          <span className="icon disabled">⟳</span> FORCE CHECK
+          <button className="action-btn" onClick={handleArchiveClick}>
+            <span className="icon">⟳</span> ARCHIVE
+          </button>
+          <button
+            className={`action-btn ${isForceCheckDisabled ? 'disabled' : ''}`}
+            onClick={handleForceCheckClick}
+            disabled={isForceCheckDisabled}
+          >
+            <span className="icon">⟳</span> FORCE CHECK
+          </button>
         </div>
       </div>
 

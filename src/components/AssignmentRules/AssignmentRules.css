@@ -1,0 +1,69 @@
+.assignment-rules-wrapper {
+  padding: 1rem;
+}
+
+.assignment-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background-color: white;
+  border: 1px solid #ccc;
+}
+
+.assignment-table th,
+.assignment-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.assignment-table th {
+  background-color: #f8f8f8;
+  font-weight: 600;
+}
+
+.assign-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.assign-icon {
+  font-size: 1.25rem;
+}
+
+.assign-team {
+  font-weight: 600;
+  color: #093c7c;
+}
+
+.assign-user {
+  font-size: 0.875rem;
+  color: #555;
+}
+
+.btn-green {
+  background-color: #059669;
+  color: white;
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.btn-outline {
+  border: 1px solid #ccc;
+  color: #333;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  background-color: white;
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+.action-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
