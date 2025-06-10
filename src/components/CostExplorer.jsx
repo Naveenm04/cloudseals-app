@@ -9,42 +9,17 @@ import '../styles/Dashboard.css';
 import RecommendationsWidget from './RecommendationsWidget';
 import ResourceTable from './ResourceTable';
 import ExceededLimitTable from './ExceededLimitTable';
+import ExpenseDashboard from './ExpenseDashboard/ExpenseDashboard';
+
 import './DashboardWidget.css';
 
 const Dashboard = () => {
   return (
     <div className="dashboard-wrapper">
       {/* Row 1: Models and Tasks */}
-      <div className="dashboard-container">
-        <div className="dashboard-columns">
-          <ModelTable />
-          <TaskTable />
-        </div>
-      </div>
-
-       <div className="dashboard-container">
-        <div className="dashboard-columns">
-          {/* <ModelTable />
-          <TaskTable /> */}
-          <OrganizationExpenses/>
-          <TopResourceExpenses/>
-        </div>
-      </div>
-
-
-      <div className="dashboard-container">
-        <div className="dashboard-columns">
-        <RecommendationsWidget />
-          {/* <OrganizationExpenses/>
-          <TopResourceExpenses/> */}
-         <ResourceTable />
-         <ExceededLimitTable/>
-        </div>
-      </div>
-
         <div className="dashboard-container">
         <div className="dashboard-columns">
-         <ExceededLimitTable/>
+         <ExpenseDashboard/>
         </div>
       </div>
 

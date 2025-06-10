@@ -3,8 +3,10 @@ import React from 'react';
 import {
   FiHome, FiStar, FiDatabase, FiLayers, FiUsers,
   FiMap, FiBarChart2, FiPieChart, FiCheckCircle, FiSettings,
-  FiFileText, FiTrendingUp, FiClock, FiPower, FiHash, FiActivity
+  FiFileText, FiTrendingUp, FiClock, FiPower, FiHash, FiActivity,
+  FiCalendar, FiRefreshCw
 } from 'react-icons/fi';
+
 import './Sidebar.css';
 
 const Sidebar = ({ onMenuSelect, selectedMenu }) => {
@@ -47,8 +49,12 @@ const Sidebar = ({ onMenuSelect, selectedMenu }) => {
 
 const systemItems = [
   { label: 'User Management', key: 'user-management', icon: <FiUsers /> },
-  { label: 'Data Sources', key: 'data-sources', icon: <FiDatabase /> }
+  { label: 'Data Sources', key: 'data-sources', icon: <FiDatabase /> },
+  { label: 'Integrations', key: 'integrations', icon: <FiRefreshCw /> },
+  { label: 'Events', key: 'events', icon: <FiCalendar /> },
+  { label: 'Settings', key: 'settings', icon: <FiSettings /> }
 ];
+
 
   return (
     <div className="sidebar">

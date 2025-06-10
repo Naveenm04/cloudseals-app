@@ -1,56 +1,32 @@
-// src/components/Dashboard.jsx
-import React from 'react';
-import ModelTable from './ModelTable';
-import TaskTable from './TaskTable';
-// import OrganizationExpenses from './OrganizationExpenses';
-import OrganizationExpenses from './OrganizationExpenses';
-import TopResourceExpenses from './TopResourceExpenses';
-import '../styles/Dashboard.css';
-import RecommendationsWidget from './RecommendationsWidget';
-import ResourceTable from './ResourceTable';
-import ExceededLimitTable from './ExceededLimitTable';
-import './DashboardWidget.css';
+import React, { useState } from 'react';
+import EnvironmentTable from './SharedEnvironments/EnvironmentTable';
+import EnvironmentCalendar from './SharedEnvironments/EnvironmentCalendar';
+import './SharedEnvironments/EnvironmentTable.css';
 
-const Dashboard = () => {
+const SharedEnvironments = () => {
+  const [view, setView] = useState('table');
+
   return (
-    <div className="dashboard-wrapper">
-      {/* Row 1: Models and Tasks */}
-      <div className="dashboard-container">
-        <div className="dashboard-columns">
-          <ModelTable />
-          <TaskTable />
+    <div className="env-wrapper">
+      <h2 className="env-title">Shared Environments</h2>
+      <div className="env-controls">
+        <div className="env-tabs">
+          <button className={`tab ${view === 'table' ? 'active' : ''}`} onClick={() => setView('table')}>Table</button>
+          <button className={`tab ${view === 'calendar' ? 'active' : ''}`} onClick={() => setView('calendar')}>Calendar</button>
         </div>
+        <label>
+          <input type="checkbox" defaultChecked />
+          Only accessible by me
+        </label>
+        <select className="status-dropdown">
+          <option>Any status</option>
+        </select>
+        <input className="search-input" type="search" placeholder="Search" />
       </div>
 
-       <div className="dashboard-container">
-        <div className="dashboard-columns">
-          {/* <ModelTable />
-          <TaskTable /> */}
-          <OrganizationExpenses/>
-          <TopResourceExpenses/>
-        </div>
-      </div>
-
-
-      <div className="dashboard-container">
-        <div className="dashboard-columns">
-        <RecommendationsWidget />
-          {/* <OrganizationExpenses/>
-          <TopResourceExpenses/> */}
-         <ResourceTable />
-         <ExceededLimitTable/>
-        </div>
-      </div>
-
-        <div className="dashboard-container">
-        <div className="dashboard-columns">
-         <ExceededLimitTable/>
-        </div>
-      </div>
-
-      {/* Row 2: Organization and Resource Expenses */}
+      {view === 'table' ? <EnvironmentTable /> : <EnvironmentCalendar />}
     </div>
   );
 };
 
-export default Dashboard;
+export default SharedEnvironments;

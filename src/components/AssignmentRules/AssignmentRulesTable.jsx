@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import rules from '../../data/assignmentRulesData';
 import './AssignmentRules.css';
 import { ArrowUp, ArrowDown, Edit, Trash } from 'lucide-react';
 
+const PAGE_SIZE = 5;
+
 const AssignmentRulesTable = ({ onBack }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.ceil(rules.length / PAGE_SIZE);
+  const startIdx = (currentPage - 1) * PAGE_SIZE;
+  const paginatedRules = rules.slice(startIdx, startIdx + PAGE_SIZE);
+
   const handleAddRule = () => {
     alert('Add Rule Clicked. (This is dummy logic — replace with form/modal)');
   };
@@ -31,6 +39,14 @@ const AssignmentRulesTable = ({ onBack }) => {
     alert(`Move Down clicked for: ${ruleName} (Reorder logic to be implemented)`);
   };
 
+  const handlePrevPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
   return (
     <div className="assignment-rules-wrapper">
       <button className="btn-outline mb-4" onClick={onBack}>
@@ -56,7 +72,7 @@ const AssignmentRulesTable = ({ onBack }) => {
           </tr>
         </thead>
         <tbody>
-          {rules.map((rule, idx) => (
+          {paginatedRules.map((rule, idx) => (
             <tr key={idx}>
               <td>{rule.name}</td>
               <td>
@@ -82,6 +98,19 @@ const AssignmentRulesTable = ({ onBack }) => {
           ))}
         </tbody>
       </table>
+
+      {/* Pagination Controls */}
+      <div className="pagination-controls mt-4 flex justify-center gap-4">
+        <button onClick={handlePrevPage} disabled={currentPage === 1} className="btn-outline">
+          Previous
+        </button>
+        <span className="text-sm font-medium text-gray-700">
+          Page {currentPage} of {totalPages}
+        </span>
+        <button onClick={handleNextPage} disabled={currentPage === totalPages} className="btn-outline">
+          Next
+        </button>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,138 @@
+.env-wrapper {
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.env-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.env-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.env-tabs {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.tab {
+  padding: 6px 12px;
+  border: none;
+  background: #fff;
+  cursor: pointer;
+}
+
+.tab.active {
+  background-color: #f6ad55;
+  color: white;
+}
+
+.status-dropdown,
+.search-input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.add-btn {
+  background-color: #008000;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 6px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.env-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+.env-table th, .env-table td {
+  text-align: left;
+  padding: 12px 10px;
+  border-bottom: 1px solid #ccc;
+  vertical-align: top;
+}
+
+.env-name {
+  font-weight: 600;
+  color: #003366;
+}
+
+.env-type {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.pool-text {
+  color: #003366;
+}
+
+.status {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.available {
+  background-color: #e5fbee;
+  color: #008000;
+}
+
+.in-use {
+  background-color: #fef5e7;
+  color: #d17f00;
+}
+
+.user-info {
+  font-size: 0.8rem;
+  color: #333;
+}
+
+.jira-links a {
+  color: #004d80;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.action-icon {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.action-icon.delete {
+  color: red;
+}
+
+.env-footer {
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.env-note {
+  margin-top: 15px;
+  padding: 12px;
+  background-color: #f5f8fa;
+  border: 1px solid #ccddee;
+  font-size: 0.85rem;
+  border-radius: 6px;
+}
