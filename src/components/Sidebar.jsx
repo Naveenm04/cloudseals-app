@@ -7,148 +7,83 @@ import {
   FiCalendar, FiRefreshCw
 } from 'react-icons/fi';
 
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Sidebar.css';
 
-const Sidebar = ({ onMenuSelect, selectedMenu }) => {
-  const topMenuItems = [
-    { label: 'Home', key: 'home', icon: <FiHome /> },
-    { label: 'Recommendations', key: 'recommendations', icon: <FiStar /> },
-    { label: 'Resources', key: 'resources', icon: <FiDatabase /> },
-    { label: 'Pools', key: 'pools', icon: <FiLayers /> },
-    { label: 'Shared Environments', key: 'shared-environments', icon: <FiUsers /> },
-  ];
+const Sidebar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const finopsItems = [
-    { label: 'Cost Explorer', key: 'cost-explorer', icon: <FiBarChart2 /> },
-    { label: 'Cost Map', key: 'cost-map', icon: <FiMap /> },
-    { label: 'FinOps Portal', key: 'finops-portal', icon: <FiPieChart /> },
-  ];
+  const handleNavigation = (key) => {
+    navigate(`/${key}`);
+  };
 
-  const mlopsItems = [
-    { label: 'Tasks', key: 'tasks', icon: <FiCheckCircle /> },
-    { label: 'Models', key: 'models', icon: <FiActivity /> },
-    { label: 'Datasets', key: 'datasets', icon: <FiDatabase /> },
-    { label: 'Artifacts', key: 'artifacts', icon: <FiFileText /> },
-    { label: 'Hypertuning', key: 'hypertuning', icon: <FiTrendingUp /> },
-    { label: 'Metrics', key: 'metrics', icon: <FiBarChart2 /> },
-  ];
+  const getActiveClass = (key) => {
+    return location.pathname.includes(key) ? 'active' : '';
+  };
 
-  const policyItems = [
-    { label: 'Anomaly Detection', key: 'anomaly-detection', icon: <FiPieChart /> },
-    { label: 'Quotas and Budgets', key: 'quotas-budgets', icon: <FiSettings /> },
-    { label: 'Tagging', key: 'tagging', icon: <FiHash /> },
-    { label: 'Resource Lifecycle', key: 'resource-lifecycle', icon: <FiClock /> },
-    { label: 'Power Schedules', key: 'power-schedules', icon: <FiPower /> },
-  ];
-
-  const sandboxItems = [
-  { label: 'K8s Rightsizing', key: 'k8s-rightsizing', icon: <FiActivity /> },
-  { label: 'Archive', key: 'archive', icon: <FiClock /> },
-  { label: 'Cost Comparison', key: 'cost-comparison', icon: <FiTrendingUp /> }
-];
-
-const systemItems = [
-  { label: 'User Management', key: 'user-management', icon: <FiUsers /> },
-  { label: 'Data Sources', key: 'data-sources', icon: <FiDatabase /> },
-  { label: 'Integrations', key: 'integrations', icon: <FiRefreshCw /> },
-  { label: 'Events', key: 'events', icon: <FiCalendar /> },
-  { label: 'Settings', key: 'settings', icon: <FiSettings /> }
-];
-
+  const renderSection = (title, items) => (
+    <div className="sidebar-section">
+      {title && <div className="menu-heading">{title}</div>}
+      {items.map(item => (
+        <button
+          key={item.key}
+          className={`menu-item ${getActiveClass(item.key)}`}
+          onClick={() => handleNavigation(item.key)}
+        >
+          <span className="icon">{item.icon}</span>
+          <span>{item.label}</span>
+        </button>
+      ))}
+    </div>
+  );
 
   return (
     <div className="sidebar">
-      {/* Top menu items */}
-      <div className="sidebar-section">
-        {topMenuItems.map(item => (
-          <button
-            key={item.key}
-            className={`menu-item ${selectedMenu === item.key ? 'active' : ''}`}
-            onClick={() => onMenuSelect(item.key)}
-          >
-            <span className="icon">{item.icon}</span>
-            <span>{item.label}</span>
-          </button>
-        ))}
-      </div>
+      {renderSection(null, [
+        { label: 'Home', key: 'home', icon: <FiHome /> },
+        { label: 'Recommendations', key: 'recommendations', icon: <FiStar /> },
+        { label: 'Resources', key: 'resources', icon: <FiDatabase /> },
+        { label: 'Pools', key: 'pools', icon: <FiLayers /> },
+        { label: 'Shared Environments', key: 'shared-environments', icon: <FiUsers /> }
+      ])}
 
-      {/* FINOPS section */}
-      <div className="sidebar-section">
-        <div className="menu-heading">FINOPS</div>
-        {finopsItems.map(item => (
-          <button
-            key={item.key}
-            className={`menu-item ${selectedMenu === item.key ? 'active' : ''}`}
-            onClick={() => onMenuSelect(item.key)}
-          >
-            <span className="icon">{item.icon}</span>
-            <span>{item.label}</span>
-          </button>
-        ))}
-      </div>
+      {renderSection('FINOPS', [
+        { label: 'Cost Explorer', key: 'cost-explorer', icon: <FiBarChart2 /> },
+        { label: 'Cost Map', key: 'cost-map', icon: <FiMap /> },
+        { label: 'FinOps Portal', key: 'finops-portal', icon: <FiPieChart /> }
+      ])}
 
-      {/* MLOPS section */}
-      <div className="sidebar-section">
-        <div className="menu-heading">MLOPS</div>
-        {mlopsItems.map(item => (
-          <button
-            key={item.key}
-            className={`menu-item ${selectedMenu === item.key ? 'active' : ''}`}
-            onClick={() => onMenuSelect(item.key)}
-          >
-            <span className="icon">{item.icon}</span>
-            <span>{item.label}</span>
-          </button>
-        ))}
-      </div>
+      {renderSection('MLOPS', [
+        { label: 'Tasks', key: 'tasks', icon: <FiCheckCircle /> },
+        { label: 'Models', key: 'models', icon: <FiActivity /> },
+        { label: 'Datasets', key: 'datasets', icon: <FiDatabase /> },
+        { label: 'Artifacts', key: 'artifacts', icon: <FiFileText /> },
+        { label: 'Hypertuning', key: 'hypertuning', icon: <FiTrendingUp /> },
+        { label: 'Metrics', key: 'metrics', icon: <FiBarChart2 /> }
+      ])}
 
-      {/* POLICIES section */}
-      <div className="sidebar-section">
-        <div className="menu-heading">POLICIES</div>
-        {policyItems.map(item => (
-          <button
-            key={item.key}
-            className={`menu-item ${selectedMenu === item.key ? 'active' : ''}`}
-            onClick={() => onMenuSelect(item.key)}
-          >
-            <span className="icon">{item.icon}</span>
-            <span>{item.label}</span>
-          </button>
-        ))}
-      </div>
+      {renderSection('POLICIES', [
+        { label: 'Anomaly Detection', key: 'anomaly-detection', icon: <FiPieChart /> },
+        { label: 'Quotas and Budgets', key: 'Quotas-and-budgetssets', icon: <FiSettings /> },
+        { label: 'Tagging', key: 'tagging', icon: <FiHash /> },
+        { label: 'Resource Lifecycle', key: 'resource-lifecycle', icon: <FiClock /> },
+        { label: 'Power Schedules', key: 'power-schedules', icon: <FiPower /> }
+      ])}
 
-      {/* Empty headers for future use */}
-      {/* SANDBOX section */}
-<div className="sidebar-section">
-  <div className="menu-heading">SANDBOX</div>
-  {sandboxItems.map(item => (
-    <button
-      key={item.key}
-      className={`menu-item ${selectedMenu === item.key ? 'active' : ''}`}
-      onClick={() => onMenuSelect(item.key)}
-    >
-      <span className="icon">{item.icon}</span>
-      <span>{item.label}</span>
-    </button>
-  ))}
-</div>
+      {renderSection('SANDBOX', [
+        { label: 'K8s Rightsizing', key: 'k8s-rightsizing', icon: <FiActivity /> },
+        { label: 'Archive', key: 'archive', icon: <FiClock /> },
+        { label: 'Cost Comparison', key: 'cost-comparison', icon: <FiTrendingUp /> }
+      ])}
 
-{/* SYSTEM section */}
-<div className="sidebar-section">
-  <div className="menu-heading">SYSTEM</div>
-  {systemItems.map(item => (
-    <button
-      key={item.key}
-      className={`menu-item ${selectedMenu === item.key ? 'active' : ''}`}
-      onClick={() => onMenuSelect(item.key)}
-    >
-      <span className="icon">{item.icon}</span>
-      <span>{item.label}</span>
-    </button>
-  ))}
-</div>
-
-     
+      {renderSection('SYSTEM', [
+        { label: 'User Management', key: 'user-management', icon: <FiUsers /> },
+        { label: 'Data Sources', key: 'data-sources', icon: <FiDatabase /> },
+        { label: 'Integrations', key: 'integrations', icon: <FiRefreshCw /> },
+        { label: 'Events', key: 'events', icon: <FiCalendar /> },
+        { label: 'Settings', key: 'settings', icon: <FiSettings /> }
+      ])}
     </div>
   );
 };

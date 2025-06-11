@@ -1,48 +1,27 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
-import Dashboard from '../components/Dashboard';
-import Recommendations from '../components/Recommendations';
-import Resources from '../components/Resources';
-import Pools from '../components/Pools';
-import SharedEnvironments from '../components/SharedEnvironments';
-import CostExplorer from '../components/CostExplorer';
-import CostMap from '../components/CostMap';
-import FinOpsPortal from '../components/FinOpsPortal';
 import ThemeToggle from '../components/ThemeToggle';
-import '../styles/theme.css';
+
 import {
-  FaRegStar,
-  FaBuilding,
-  FaBookOpen,
-  FaQuestionCircle,
-  FaGraduationCap,
-  FaUserCircle
+  FaRegStar, FaBuilding, FaBookOpen,
+  FaQuestionCircle, FaGraduationCap, FaUserCircle
 } from 'react-icons/fa';
+
+import '../styles/theme.css';
 import '../styles/Home.css';
 
 const MainDashboard = () => {
   const [showAlert, setShowAlert] = useState(true);
-  const [selectedMenu, setSelectedMenu] = useState('home');
   const [orgDropdownOpen, setOrgDropdownOpen] = useState(false);
   const [selectedOrg, setSelectedOrg] = useState('CloudSeals');
+
+  const [selectedMenu, setSelectedMenu] = useState('home'); // ✅ added state for Sidebar
+
   const navigate = useNavigate();
+  const location = useLocation();
 
   const sampleOrganizations = ['CloudSeals', 'SkyNet Corp', 'DataWaves', 'InfraNova'];
-
-  const renderContent = () => {
-    switch (selectedMenu) {
-      case 'home': return <Dashboard />;
-      case 'recommendations': return <Recommendations />;
-      case 'resources': return <Resources />;
-      case 'pools': return <Pools />;
-      case 'shared-environments': return <SharedEnvironments />;
-      case 'cost-explorer': return <CostExplorer />;
-      case 'cost-map': return <CostMap />;
-      case 'finops-portal': return <FinOpsPortal />;
-      default: return <Dashboard />;
-    }
-  };
 
   return (
     <div className="home-wrapper font-sans text-sm">
@@ -108,9 +87,13 @@ const MainDashboard = () => {
 
       {/* Sidebar + Content */}
       <div className="home-page-layout flex">
-        <Sidebar onMenuSelect={setSelectedMenu} selectedMenu={selectedMenu} />
-        <div className="home-container flex-1">
-          {renderContent()}
+        {/* ✅ Fixed Sidebar with required props */}
+        <Sidebar
+          onMenuSelect={setSelectedMenu}
+          selectedMenu={selectedMenu}
+        />
+        <div className="home-container flex-1 p-4">
+          <Outlet />
         </div>
       </div>
     </div>

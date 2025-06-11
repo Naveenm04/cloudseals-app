@@ -8,6 +8,8 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { format } from 'date-fns';
 import data from './expenseData';
+import PoolSummary from './PoolSummary';
+
 
 const ExpenseDashboard = () => {
   const [view, setView] = useState('Daily');
@@ -71,6 +73,7 @@ const ExpenseDashboard = () => {
         <ExpenseSummary data={currentData} />
         <ExpenseChart data={currentData} />
         <ExpenseBreakdown />
+        <PoolSummary/>
       </div>
     </div>
   );
