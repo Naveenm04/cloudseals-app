@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import PasswordInput from './PasswordInput';
 import SocialSignIn from './SocialSignIn';
 import './Auth.css';
-import Header from '../Header';
+import Header from '../Header'; // This will now work if Header.jsx is fixed
 import logo from '../../assets/logo.png';
 
 const SignInForm = () => {
@@ -17,7 +17,7 @@ const SignInForm = () => {
 
   return (
     <>
-      <Header /> {/* Header for sign-in page */}
+      <Header />
       <div className="auth-container">
         <img src={logo} alt="Logo" className="auth-logo" />
         <form className="auth-form" onSubmit={handleSignIn}>

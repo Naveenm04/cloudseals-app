@@ -13,7 +13,7 @@ import SharedEnvironments from './components/SharedEnvironments';
 import CostExplorer from './components/CostExplorer';
 import CostMap from './components/CostMap';
 import FinOpsPortal from './components/FinOpsPortal';
-import Models from './pages/Models'; 
+import Models from './pages/Models';
 import Datasets from './pages/Datasets';
 import Artifacts from './pages/Artifacts';
 import Hypertuning from './pages/Hypertuning';
@@ -30,21 +30,23 @@ import UserManagement from './pages/UserManagement';
 import Integrations from './pages/Integrations';
 import Events from './pages/Events';
 import Settings from './pages/Settings';
-import Tasks from './pages/Tasks'; // ✅ Correct for default export
+import Tasks from './pages/Tasks';
 import DataSources from './pages/DataSources';
-
 
 function App() {
   return (
     <ThemeProvider>
       <Router>
         <Routes>
+          {/* Redirect base to /home */}
+          {/* <Route path="/" element={<Navigate to="/home" replace />} /> */}
+             <Route path="/" element={<Navigate to="/signup" replace />} />
+
           {/* Auth Pages */}
-          <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/signin" element={<SignInForm />} />
 
-          {/* Main Dashboard Layout */}
+          {/* Main Dashboard Layout Routes */}
           <Route path="/" element={<MainDashboard />}>
             <Route path="home" element={<Dashboard />} />
             <Route path="recommendations" element={<Recommendations />} />
@@ -55,25 +57,24 @@ function App() {
             <Route path="cost-map" element={<CostMap />} />
             <Route path="finops-portal" element={<FinOpsPortal />} />
             <Route path="tasks" element={<Tasks />} />
-            <Route path="models" element={<Models/>}/>
-            <Route path="datasets" element={<Datasets/>}/>
-            <Route path="artifacts" element={<Artifacts/>}/> 
-            <Route path="hypertuning" element={<Hypertuning/>}/>
-            <Route path="metrics" element={<Metrics/>}/>
-            <Route path="anomaly-detection" element={<AnomalyDetection/>}/>
-            <Route path="quotas-and-budgetssets" element={<QuotasAndBudgetssets/>}/>
-            <Route path="tagging" element={<Tagging/>}/>
-            <Route path="resource-lifecycle" element={<ResourceLifecycle/>}/>
-            <Route path="power-schedules" element={<PowerSchedules/>}/>
-            <Route path="k8s-rightsizing" element={<K8sRightsizing/>}/>
-            <Route path="archive" element={<Archive/>}/>
-            <Route path="cost-comparison" element={<CostComparison/>}/>
-            <Route path="user-management" element={<UserManagement/>}/>
-            <Route path="data-sources" element={<DataSources/>}/>
-            <Route path="integrations" element={<Integrations/>}/>
-            <Route path="events" element={<Events/>}/>
-            <Route path="settings" element={<Settings/>}/>
-            
+            <Route path="models" element={<Models />} />
+            <Route path="datasets" element={<Datasets />} />
+            <Route path="artifacts" element={<Artifacts />} />
+            <Route path="hypertuning" element={<Hypertuning />} />
+            <Route path="metrics" element={<Metrics />} />
+            <Route path="anomaly-detection" element={<AnomalyDetection />} />
+            <Route path="quotas-and-budgetssets" element={<QuotasAndBudgetssets />} />
+            <Route path="tagging" element={<Tagging />} />
+            <Route path="resource-lifecycle" element={<ResourceLifecycle />} />
+            <Route path="power-schedules" element={<PowerSchedules />} />
+            <Route path="k8s-rightsizing" element={<K8sRightsizing />} />
+            <Route path="archive" element={<Archive />} />
+            <Route path="cost-comparison" element={<CostComparison />} />
+            <Route path="user-management" element={<UserManagement />} />
+            <Route path="data-sources" element={<DataSources />} />
+            <Route path="integrations" element={<Integrations />} />
+            <Route path="events" element={<Events />} />
+            <Route path="settings" element={<Settings />} />
           </Route>
         </Routes>
       </Router>
@@ -82,4 +83,3 @@ function App() {
 }
 
 export default App;
-

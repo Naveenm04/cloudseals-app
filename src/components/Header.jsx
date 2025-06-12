@@ -1,3 +1,4 @@
+// src/components/Header.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
@@ -11,10 +12,10 @@ const Header = () => {
         <span className="logo-text">CloudSeals</span>
       </div>
       <nav className="nav-links">
-        <Link to="/docs">Solutions</Link>
-        <Link to="/pricing">Services</Link>
-        <Link to="/about">Company</Link>
-        <Link to="/about">Case Studies</Link>
+        <Link to="/solutions">Solutions</Link>
+        <Link to="/services">Services</Link>
+        <Link to="/company">Company</Link>
+        <Link to="/casestudies">Case Studies</Link>
       </nav>
       <div className="header-actions">
         <Link to="/signin">
@@ -28,4 +29,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Header; // ✅ This line fixes your error
