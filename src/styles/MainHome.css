@@ -1,0 +1,17 @@
+/* src/styles/MainHome.css */
+
+.main-home-wrapper {
+  padding: 2rem;
+  text-align: center;
+}
+
+.main-home-wrapper h1 {
+  font-size: 2rem;
+  color: #1f2937;
+}
+
+.main-home-wrapper p {
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+  color: #4b5563;
+}

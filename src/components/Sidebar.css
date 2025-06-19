@@ -1,5 +1,5 @@
 .sidebar {
-  width: 220px; /* Ensure enough width */
+  width: 276px; /* Ensure enough width */
   background-color: #1a2238;
   color: white;
   display: flex;
@@ -10,6 +10,9 @@
 .sidebar-section {
   margin-bottom: 20px;
 }
+/* .home-page-layout .flex{
+margin-top: -1px;
+} */
 
 .menu-heading {
   font-size: 12px;
@@ -54,3 +57,41 @@
   align-items: center;
   justify-content: center;
 }
+
+/* Sidebar.css */
+.dark-mode-toggle-section {
+  padding: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+/* Add to Sidebar.css */
+.menu-item.no-border {
+  border: none;
+  background: none;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.submenu-item {
+  padding-left: 2rem;
+  font-size: 0.95rem;
+}
+.submenu {
+  padding-left: 1rem;
+}
+
+.submenu-item {
+  padding-left: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.no-border {
+  border: none;
+  background: transparent;
+}
+.home-page-layout .flex{
+  margin-top: -1px !important;
+
+}
+

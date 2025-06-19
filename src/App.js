@@ -1,80 +1,77 @@
+// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { ThemeProvider } from './context/ThemeContext';
+import ThemeProvider from './context/ThemeContext';
 
-import MainDashboard from './pages/MainDashboard';
 import SignUpForm from './components/Auth/SignUpForm';
 import SignInForm from './components/Auth/SignInForm';
+
+import MainHome from './pages/MainHome';
+import MainDashboard from './pages/MainDashboard';
 import Dashboard from './components/Dashboard';
-import Recommendations from './components/Recommendations';
-import Resources from './components/Resources';
-import Pools from './components/Pools';
-import SharedEnvironments from './components/SharedEnvironments';
-import CostExplorer from './components/CostExplorer';
-import CostMap from './components/CostMap';
-import FinOpsPortal from './components/FinOpsPortal';
-import Models from './pages/Models';
-import Datasets from './pages/Datasets';
-import Artifacts from './pages/Artifacts';
-import Hypertuning from './pages/Hypertuning';
-import Metrics from './pages/Metrics';
-import AnomalyDetection from './pages/AnomalyDetection';
-import QuotasAndBudgetssets from './pages/QuotasAndBudgetssets';
-import Tagging from './pages/Tagging';
-import ResourceLifecycle from './pages/ResourceLifecycle';
-import PowerSchedules from './pages/PowerSchedules';
-import K8sRightsizing from './pages/K8sRightsizing';
-import Archive from './pages/Archive';
-import CostComparison from './pages/CostComparison';
-import UserManagement from './pages/UserManagement';
-import Integrations from './pages/Integrations';
-import Events from './pages/Events';
+import DashboardOverview from './pages/DashboardOverview';
+
+import CloudResourcesNetwork from './components/CloudResourcesNetwork';
+import CloudResourcesCompute from './components/CloudResourcesCompute';
+import CloudResourcesStorage from './components/CloudResourcesStorage';
+import CloudResourcesDatabases from './components/CloudResourcesDatabases';
+
+import Storage from './components/Storage';
+import Network from './components/Network';
+
+import AiAgents from './components/AiAgents';
+import WorkflowsAutomations from './components/WorkflowsAutomations';
+import CostOptimization from './components/CostOptimization';
+import ComplianceSecurity from './components/ComplianceSecurity';
+
+import AgentOpsMonitoringHealth from './components/AgentOpsMonitoringHealth';
+import BiasFairnessAnalytics from './pages/BiasFairnessAnalytics';
+// import AgentOpsOrMonitoringHealth from './pages/AgentOpsOrMonitoringHealth';
+
+import AuditLogs from './pages/AuditLogs';
 import Settings from './pages/Settings';
-import Tasks from './pages/Tasks';
-import DataSources from './pages/DataSources';
+import UserManagement from './pages/UserManagement'; // ✅ Only ONE import here
+import OrgSettings from './pages/OrgSettings';
+import Billing from './pages/Billing';
+import FeedbackSupport from './pages/FeedbackSupport';
+import DarkLightModeToggle from './pages/DarkLightModeToggle';
 
 function App() {
   return (
     <ThemeProvider>
       <Router>
         <Routes>
-          {/* Redirect base to /home */}
-          {/* <Route path="/" element={<Navigate to="/home" replace />} /> */}
-             <Route path="/" element={<Navigate to="/signup" replace />} />
+          {/* Default Route */}
+          <Route path="/" element={<Navigate to="/mainhome" replace />} />
 
-          {/* Auth Pages */}
+          {/* Public Routes */}
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/signin" element={<SignInForm />} />
+          <Route path="/mainhome" element={<MainHome />} />
 
-          {/* Main Dashboard Layout Routes */}
+          {/* Protected Routes under Dashboard Layout */}
           <Route path="/" element={<MainDashboard />}>
-            <Route path="home" element={<Dashboard />} />
-            <Route path="recommendations" element={<Recommendations />} />
-            <Route path="resources" element={<Resources />} />
-            <Route path="pools" element={<Pools />} />
-            <Route path="shared-environments" element={<SharedEnvironments />} />
-            <Route path="cost-explorer" element={<CostExplorer />} />
-            <Route path="cost-map" element={<CostMap />} />
-            <Route path="finops-portal" element={<FinOpsPortal />} />
-            <Route path="tasks" element={<Tasks />} />
-            <Route path="models" element={<Models />} />
-            <Route path="datasets" element={<Datasets />} />
-            <Route path="artifacts" element={<Artifacts />} />
-            <Route path="hypertuning" element={<Hypertuning />} />
-            <Route path="metrics" element={<Metrics />} />
-            <Route path="anomaly-detection" element={<AnomalyDetection />} />
-            <Route path="quotas-and-budgetssets" element={<QuotasAndBudgetssets />} />
-            <Route path="tagging" element={<Tagging />} />
-            <Route path="resource-lifecycle" element={<ResourceLifecycle />} />
-            <Route path="power-schedules" element={<PowerSchedules />} />
-            <Route path="k8s-rightsizing" element={<K8sRightsizing />} />
-            <Route path="archive" element={<Archive />} />
-            <Route path="cost-comparison" element={<CostComparison />} />
-            <Route path="user-management" element={<UserManagement />} />
-            <Route path="data-sources" element={<DataSources />} />
-            <Route path="integrations" element={<Integrations />} />
-            <Route path="events" element={<Events />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="dashboard-overview" element={<DashboardOverview />} />
+            <Route path="cloud-resources-network" element={<CloudResourcesNetwork />} />
+            <Route path="cloud-resources-compute" element={<CloudResourcesCompute />} />
+            <Route path="cloud-resources-storage" element={<CloudResourcesStorage />} />
+            <Route path="cloud-resources-databases" element={<CloudResourcesDatabases />} />
+            <Route path="storage" element={<Storage />} />
+            <Route path="network" element={<Network />} />
+            <Route path="ai-agents" element={<AiAgents />} />
+            <Route path="workflows-automations" element={<WorkflowsAutomations />} />
+            <Route path="cost-optimization" element={<CostOptimization />} />
+            <Route path="compliance-security" element={<ComplianceSecurity />} />
+            <Route path="agentops" element={<AgentOpsMonitoringHealth />} />
+            <Route path="bias-fairness-analytics" element={<BiasFairnessAnalytics />} />
+            <Route path="audit-logs" element={<AuditLogs />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="user-management" element={<UserManagement />} />
+            <Route path="org-settings" element={<OrgSettings />} />
+            <Route path="billing" element={<Billing />} />
+            <Route path="feedback-support" element={<FeedbackSupport />} />
+            <Route path="dark-light-toggle" element={<DarkLightModeToggle />} />
           </Route>
         </Routes>
       </Router>

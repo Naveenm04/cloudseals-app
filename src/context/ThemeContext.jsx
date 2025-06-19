@@ -1,19 +1,20 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
+// Create the context
 const ThemeContext = createContext();
 
-export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(() =>
-    localStorage.getItem('theme') || 'light'
-  );
+// ThemeProvider component
+const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
 
   useEffect(() => {
-    document.body.className = theme; // Apply to full body
+    document.body.className = theme;
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const toggleTheme = () =>
+  const toggleTheme = () => {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+  };
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
@@ -22,6 +23,7 @@ export const ThemeProvider = ({ children }) => {
   );
 };
 
+// Custom hook
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (!context) {
@@ -29,3 +31,6 @@ export const useTheme = () => {
   }
   return context;
 };
+
+// Default export
+export default ThemeProvider;

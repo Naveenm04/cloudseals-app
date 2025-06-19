@@ -52,4 +52,28 @@ body.dark {
   font-size: 0.9rem;
 }
 
+:root {
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --card-bg: #f9f9f9;
+  --button-bg: #e0e0e0;
+  --button-text: #333;
+  --shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+[data-theme='dark'] {
+  --bg: #0d1117;
+  --text: #e6edf3;
+  --card-bg: #161b22;
+  --button-bg: #30363d;
+  --button-text: #ffffff;
+  --shadow: 0 2px 8px rgba(255,255,255,0.05);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 

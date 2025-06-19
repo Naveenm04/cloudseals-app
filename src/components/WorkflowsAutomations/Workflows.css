@@ -1,0 +1,53 @@
+/* src/components/WorkflowsAutomations/Workflows.css */
+.workflow-wrapper {
+  width: 75vw;
+  min-height: 100vh;
+  background-color: #f8f9fc;
+  padding: 30px;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.tab-switcher {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.tab-switcher button {
+  padding: 8px 16px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.tab-switcher .active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.heading {
+  font-size: 22px;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.editor-box, .log-box {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  min-height: 300px;
+}
+
+pre {
+  white-space: pre-wrap;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.5;
+}

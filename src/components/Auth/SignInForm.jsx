@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import PasswordInput from './PasswordInput';
 import SocialSignIn from './SocialSignIn';
 import './Auth.css';
-import Header from '../Header'; // This will now work if Header.jsx is fixed
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo.png'; //Logo import
 
 const SignInForm = () => {
   const navigate = useNavigate();
@@ -12,12 +11,12 @@ const SignInForm = () => {
   const handleSignIn = (e) => {
     e.preventDefault();
     // Add sign-in logic here
-    navigate('/home'); // Redirect after sign in
+    navigate('/dashboard-overview'); //redirecting to '/dashboard'
   };
 
   return (
     <>
-      <Header />
+      {/* <Header /> Removed since Header is deleted */}
       <div className="auth-container">
         <img src={logo} alt="Logo" className="auth-logo" />
         <form className="auth-form" onSubmit={handleSignIn}>

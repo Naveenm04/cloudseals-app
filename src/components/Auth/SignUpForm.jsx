@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import PasswordInput from './PasswordInput';
 import SocialSignIn from './SocialSignIn';
 import './Auth.css';
-import Header from '../Header'; // Make sure Header.jsx has a default export
 import logo from '../../assets/logo.png';
 
 const SignUpForm = () => {
@@ -12,16 +11,20 @@ const SignUpForm = () => {
   const handleRegister = (e) => {
     e.preventDefault();
     // Add validation here if needed
-    navigate('/home');
+    navigate('/dashboard-overview'); // ✅ updated route to /dashboard instead of /home
   };
 
   return (
     <>
-      <Header />
+      {/* <Header /> Removed since Header.jsx is deleted */}
       <div className="auth-container">
         <img src={logo} alt="Logo" className="auth-logo" />
         <form className="auth-form" onSubmit={handleRegister}>
-          <input type="email" placeholder="Business email (login) *" required />
+          <input
+            type="email"
+            placeholder="Business email (login) *"
+            required
+          />
           <input type="text" placeholder="Full name *" required />
           <PasswordInput placeholder="Password" />
           <PasswordInput placeholder="Confirm password" />
@@ -35,6 +38,7 @@ const SignUpForm = () => {
           </p>
         </form>
         <SocialSignIn />
+        {/* <SignUpHero /> Uncomment if needed later */}
       </div>
     </>
   );

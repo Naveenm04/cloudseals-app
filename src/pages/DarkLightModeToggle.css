@@ -1,0 +1,50 @@
+.theme-toggle-wrapper {
+  background-color: var(--card-bg);
+  color: var(--text);
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.toggle-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.power-icon {
+  font-size: 1.5rem;
+}
+
+.theme-toggle-button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle-button:hover {
+  opacity: 0.9;
+}
+
+/* src/pages/DarkLightModeToggle.css */
+
+.plain-toggle-button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  display: inline;
+}

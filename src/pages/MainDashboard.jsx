@@ -1,101 +1,89 @@
 import React, { useState } from 'react';
-import { Outlet, useNavigate, useLocation } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
-import ThemeToggle from '../components/ThemeToggle';
-
+import '../styles/DashboardHeader.css';
 import {
-  FaRegStar, FaBuilding, FaBookOpen,
-  FaQuestionCircle, FaGraduationCap, FaUserCircle
+  FaBars, FaBell, FaSearch, FaUserCircle, FaSignOutAlt
 } from 'react-icons/fa';
-
 import '../styles/theme.css';
 import '../styles/Home.css';
+import DashboardFooter from '../components/DashboardFooter/DashboardFooter';
 
 const MainDashboard = () => {
-  const [showAlert, setShowAlert] = useState(true);
-  const [orgDropdownOpen, setOrgDropdownOpen] = useState(false);
-  const [selectedOrg, setSelectedOrg] = useState('CloudSeals');
-
-  const [selectedMenu, setSelectedMenu] = useState('home'); // ✅ added state for Sidebar
-
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const navigate = useNavigate();
-  const location = useLocation();
-
-  const sampleOrganizations = ['CloudSeals', 'SkyNet Corp', 'DataWaves', 'InfraNova'];
 
   return (
     <div className="home-wrapper font-sans text-sm">
-      {/* Alert Bar */}
-      {showAlert && (
-        <div className="top-alert">
-          <span>
-            Please consider giving CloudSeals a{' '}
-            <button className="star-button"><FaRegStar /> Star <b>1,473</b></button> on GitHub.
-          </span>
-          <button onClick={() => setShowAlert(false)} className="dismiss-button">✖</button>
-        </div>
-      )}
-
       {/* Header */}
-      <header className="header">
+      <header className="header bg-[#1f2937] text-white shadow-md">
+        {/* Left Side */}
         <div className="header-left">
-          <div className="logo-container">
-            <span className="logo-text">Cloudseals</span>
-            <a
-              className="demo-tag"
-              href="https://www.openops.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >DEMO</a>
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="menu-btn"
+            aria-label="Toggle Sidebar"
+          >
+            <FaBars className="text-lg" />
+          </button>
+          <div
+            className="logo-container cursor-pointer"
+            onClick={() => navigate('/dashboard-overview')}
+          >
+            <span className="logo-text">CloudSeals</span>
           </div>
-          <span className="demo-mode">You are in a live demo mode</span>
-          <button className="register-button" onClick={() => navigate('/signup')}>REGISTER</button>
         </div>
 
-        <div className="header-right relative">
-          <div className="org-selector cursor-pointer" onClick={() => setOrgDropdownOpen(prev => !prev)}>
-            <FaBuilding /> {selectedOrg} ▾
+        {/* Right Side */}
+        <div className="header-right">
+          <FaBell className="text-xl cursor-pointer" title="Notifications" />
+
+          {/* Search Input */}
+          <div className="search-container relative">
+            <FaSearch className="search-icon" />
+            <input
+              type="text"
+              placeholder="Search..."
+              className="search-input"
+            />
           </div>
 
-          {orgDropdownOpen && (
-            <div className="org-dropdown-menu absolute right-0 mt-1 bg-white border rounded shadow z-10">
-              {sampleOrganizations.map((org, index) => (
+          {/* User Dropdown */}
+          <div className="user-dropdown relative">
+            <FaUserCircle
+              className="text-2xl cursor-pointer"
+              onClick={() => setUserDropdownOpen(prev => !prev)}
+            />
+            {userDropdownOpen && (
+              <div className="dropdown-menu">
+                <div className="dropdown-item">👤 Profile & Settings</div>
+                <div className="dropdown-item">🏢 Org Switcher</div>
+                <div className="dropdown-item">📘 Help & Docs</div>
                 <div
-                  key={index}
+                  className="dropdown-item logout"
                   onClick={() => {
-                    setSelectedOrg(org);
-                    setOrgDropdownOpen(false);
+                    localStorage.clear();
+                    navigate('/login');
                   }}
-                  className="dropdown-item px-4 py-2 hover:bg-gray-100 cursor-pointer"
                 >
-                  {org}
+                  <FaSignOutAlt /> Logout
                 </div>
-              ))}
-            </div>
-          )}
-
-          <FaBookOpen className="header-icon" />
-          <FaQuestionCircle className="header-icon" />
-          <FaGraduationCap className="header-icon" />
-          <ThemeToggle />
-          <div className="user-icon-wrapper">
-            <FaUserCircle className="header-icon" />
-            <div className="user-name-tooltip">User Profile</div>
+              </div>
+            )}
           </div>
         </div>
       </header>
 
-      {/* Sidebar + Content */}
+      {/* Sidebar + Main Content */}
       <div className="home-page-layout flex">
-        {/* ✅ Fixed Sidebar with required props */}
-        <Sidebar
-          onMenuSelect={setSelectedMenu}
-          selectedMenu={selectedMenu}
-        />
+        {sidebarOpen && <Sidebar isOpen={sidebarOpen} />}
         <div className="home-container flex-1 p-4">
           <Outlet />
         </div>
       </div>
+
+      <DashboardFooter />
     </div>
   );
 };

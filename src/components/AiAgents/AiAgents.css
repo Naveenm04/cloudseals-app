@@ -1,0 +1,83 @@
+/* src/components/AiAgents/AiAgents.css */
+.ai-agents-wrapper {
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+ width: 75vw;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.agents-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.agents-table th, .agents-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.agents-table th {
+  background: #f0f0f0;
+  font-weight: 600;
+  color: #444;
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 12px;
+}
+
+.status.running {
+  background-color: #28a745;
+}
+
+.status.idle {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.btn-view, .btn-back {
+  background: #007bff;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-back {
+  margin-bottom: 10px;
+}
+
+.btn-view:hover, .btn-back:hover {
+  background: #0056b3;
+}
+
+.logs {
+  background: #272822;
+  color: #f8f8f2;
+  padding: 10px;
+  border-radius: 6px;
+  white-space: pre-wrap;
+}
+
+.detail-row {
+  margin-bottom: 15px;
+}
