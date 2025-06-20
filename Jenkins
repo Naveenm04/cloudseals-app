@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    tools {
+        nodejs 'Node18'
+    }
+
+    environment {
+        CI = 'false'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Parvathi4147/cloudseals-app.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+
+        stage('Deploy to GCP VM') {
+            steps {
+                sshagent(['gcp-ssh-key']) {
+                    sh """
+                        ssh -o StrictHostKeyChecking=no naveen_malothu_cloudseals_co_uk@34.47.236.22 'rm -rf /var/www/html/*'
+                        scp -r build/* naveen_malothu_cloudseals_co_uk@34.47.236.22:/var/www/html/
+
