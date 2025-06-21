@@ -28,7 +28,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
                     sh """
                         ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
-                          -Dsonar.projectKey=cloudseals-frontend \
+                          -Dsonar.projectKey=frontend-pipeline \
                           -Dsonar.sources=src \
                           -Dsonar.host.url=http://34.100.218.206:9000 \
                           -Dsonar.login=$SONAR_TOKEN
