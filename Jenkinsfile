@@ -2,12 +2,12 @@ pipeline {
     agent any
 
     environment {
-        SONAR_TOKEN = credentials('sonarqube-token') // Credential ID for SonarQube
-        GIT_CREDENTIAL_ID = 'cloudseals-github' // GitHub PAT credential ID
+        SONAR_TOKEN = credentials('sonarqube-token') 
+        GIT_CREDENTIAL_ID = 'cloudseals-github' 
     }
 
     tools {
-        nodejs 'NodeJS 20' // Make sure this matches Jenkins tool name exactly
+        nodejs 'NodeJS 20' 
     }
 
     stages {
@@ -37,7 +37,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                // Ignore eslint warnings to prevent CI break
+                
                 sh 'CI=false npm run build'
             }
         }
