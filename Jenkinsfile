@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'NodeJS' // Make sure this matches exactly in "Global Tool Configuration"
+        nodejs 'NodeJS'
     }
 
     environment {
-        SONAR_TOKEN = credentials('sonarqube-token') // Make sure this ID exists in Jenkins Credentials
+        SONAR_TOKEN = credentials('sonarqube-token')
     }
 
     stages {
@@ -24,14 +24,14 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('<REPLACE_WITH_YOUR_SONAR_NAME>') {
-                    sh '''
+                withSonarQubeEnv('SonarQube') {
+                    sh """
                         sonar-scanner \
                         -Dsonar.projectKey=frontend-pipeline \
                         -Dsonar.sources=src \
                         -Dsonar.host.url=http://34.100.218.206:9000 \
-                        -Dsonar.token=$SONAR_TOKEN
-                    '''
+                        -Dsonar.token=${SONAR_TOKEN}
+                    """
                 }
             }
         }
