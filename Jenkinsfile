@@ -3,7 +3,8 @@ pipeline {
 
     tools {
         nodejs 'NodeJS'
-        sonarQubeScanner 'SonarScanner'
+        // Correct sonar scanner tool type
+        'hudson.plugins.sonar.SonarRunnerInstallation' 'SonarScanner'
     }
 
     environment {
