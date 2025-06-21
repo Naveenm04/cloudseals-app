@@ -45,4 +45,5 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline comp
+            echo 'Pipeline completed successfully'
+
