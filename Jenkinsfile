@@ -2,17 +2,18 @@ pipeline {
     agent any
 
     environment {
-        SONAR_TOKEN = credentials('sonar-token')
+        SONARQUBE = 'SonarQube'
+        SONAR_SCANNER = tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
     }
 
     tools {
-        nodejs 'NodeJS 20'
+        nodejs 'NodeJS' // make sure you have a NodeJS tool named exactly 'NodeJS' in Jenkins Tools config
     }
 
     stages {
-        stage('Checkout Source') {
+        stage('Checkout') {
             steps {
-                git credentialsId: 'cloudseals-github', url: 'https://github.com/Naveenm04/cloudseals-frontend.git'
+                git url: 'https://github.com/Naveenm04/cloudseals-frontend.git', branch: 'main'
             }
         }
 
@@ -25,20 +26,14 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh '''
-                        /opt/sonar-scanner/bin/sonar-scanner \
-                        -Dsonar.projectKey=frontend-pipeline \
-                        -Dsonar.sources=src \
-                        -Dsonar.host.url=$SONAR_HOST_URL \
-                        -Dsonar.login=$SONAR_TOKEN
-                    '''
+                    sh "${SONAR_SCANNER}/bin/sonar-scanner -Dsonar.projectKey=frontend-pipeline -Dsonar.sources=src -Dsonar.host.url=http://34.100.218.206:9000 -Dsonar.token=$SONAR_TOKEN"
                 }
             }
         }
 
         stage('Build') {
             steps {
-                sh 'echo "Build step here (e.g., npm run build)"'
+                sh 'npm run build'
             }
         }
     }
@@ -46,4 +41,9 @@ pipeline {
     post {
         success {
             echo 'Pipeline completed successfully'
-
+        }
+        failure {
+            echo 'Pipeline failed'
+        }
+    }
+}
