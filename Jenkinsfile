@@ -3,6 +3,7 @@ pipeline {
 
     tools {
         nodejs 'NodeJS'
+        sonarQubeScanner 'SonarScanner'
     }
 
     environment {
@@ -40,17 +41,6 @@ pipeline {
             steps {
                 sh 'npm run build'
             }
-        }
-    }
-
-    post {
-        success {
-            slackSend(channel: '#jenkins_mvp', color: 'good',
-                message: "✅ Build SUCCESS: Job ${env.JOB_NAME} [#${env.BUILD_NUMBER}] - ${env.BUILD_URL}")
-        }
-        failure {
-            slackSend(channel: '#jenkins_mvp', color: 'danger',
-                message: "❌ Build FAILED: Job ${env.JOB_NAME} [#${env.BUILD_NUMBER}] - ${env.BUILD_URL}")
         }
     }
 }
