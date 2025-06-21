@@ -1,20 +1,18 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs 'NodeJS'
-        // Correct sonar scanner tool type
-        'hudson.plugins.sonar.SonarRunnerInstallation' 'SonarScanner'
+    environment {
+        SONAR_TOKEN = credentials('sonar-token')
     }
 
-    environment {
-        SONAR_TOKEN = credentials('sonarqube-token')
+    tools {
+        nodejs 'NodeJS 20'
     }
 
     stages {
-        stage('Checkout') {
+        stage('Checkout Source') {
             steps {
-                git url: 'https://github.com/Naveenm04/cloudseals-frontend.git', branch: 'main'
+                git credentialsId: 'cloudseals-github', url: 'https://github.com/Naveenm04/cloudseals-frontend.git'
             }
         }
 
@@ -28,11 +26,11 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh '''
-                        sonar-scanner \
+                        /opt/sonar-scanner/bin/sonar-scanner \
                         -Dsonar.projectKey=frontend-pipeline \
                         -Dsonar.sources=src \
-                        -Dsonar.host.url=http://34.100.218.206:9000 \
-                        -Dsonar.token=$SONAR_TOKEN
+                        -Dsonar.host.url=$SONAR_HOST_URL \
+                        -Dsonar.login=$SONAR_TOKEN
                     '''
                 }
             }
@@ -40,8 +38,11 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'npm run build'
+                sh 'echo "Build step here (e.g., npm run build)"'
             }
         }
     }
-}
+
+    post {
+        success {
+            echo 'Pipeline comp
