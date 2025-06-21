@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'NodeJS' // Make sure this is the correct label in Manage Jenkins > Global Tool Configuration
+        nodejs 'NodeJS' // Make sure "NodeJS" is configured in Jenkins Global Tools
     }
 
     environment {
-        SONAR_TOKEN = credentials('sonarqube-token') // Jenkins credential ID
+        SONAR_TOKEN = credentials('sonarqube-token') // Secret Text credential ID
     }
 
     stages {
@@ -24,7 +24,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') { // Must match Jenkins SonarQube config name
+                withSonarQubeEnv('SonarQube') { // Jenkins SonarQube server name
                     sh '''
                         sonar-scanner \
                         -Dsonar.projectKey=frontend-pipeline \
