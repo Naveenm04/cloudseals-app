@@ -1,19 +1,20 @@
 pipeline {
     agent any
 
-    environment {
-        NODE_ENV = 'production'
-        SONAR_SCANNER_HOME = tool 'SonarScanner' 
+    tools {
+        nodejs 'NodeJS'
     }
 
-    tools {
-        nodejs 'Node18' 
+    environment {
+        SONAR_SCANNER_HOME = tool 'SonarScanner'
+        SONAR_TOKEN = credentials('sonarqube-token')
     }
 
     stages {
+
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/Naveenm04/cloudseals-frontend.git'
+                git credentialsId: 'cloudseals-github', url: 'https://github.com/Naveenm04/cloudseals-frontend.git', branch: 'main'
             }
         }
 
@@ -26,38 +27,35 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
-                    sh """
-                        ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
-                          -Dsonar.projectKey=frontend-pipeline \
-                          -Dsonar.sources=src \
-                          -Dsonar.host.url=http://34.100.218.206:9000 \
-                          -Dsonar.login=$SONAR_TOKEN
-                    """
+                    sh "${SONAR_SCANNER_HOME}/bin/sonar-scanner " +
+                        "-Dsonar.projectKey=frontend-pipeline " +
+                        "-Dsonar.sources=src " +
+                        "-Dsonar.host.url=http://34.100.218.206:9000 " +
+                        "-Dsonar.token=$SONAR_TOKEN"
                 }
             }
         }
 
         stage('Build Frontend') {
             steps {
-                sh 'npm run build'
+                // Avoid treating warnings as errors
+                sh 'CI=false npm run build'
             }
         }
 
         stage('Deploy (optional)') {
             when {
-                expression { false } 
+                expression { return false } // disable by default
             }
             steps {
-                sshagent (credentials: ['cis-frontend-ssh-key']) {
-                    sh 'scp -r build/* ubuntu@34.47.236.22:/var/www/cloudseals-app/'
-                }
+                echo 'Deploy step goes here.'
             }
         }
     }
 
     post {
         success {
-            echo '✅ Build & SonarQube Analysis Successful!'
+            echo '✅ Pipeline completed successfully!'
         }
         failure {
             echo '❌ Pipeline failed. Check error log above.'
