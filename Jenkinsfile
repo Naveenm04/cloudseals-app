@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         SONAR_TOKEN = credentials('SonarQube Token for cloudseals-frontend')
-        GITHUB_CREDENTIALS = credentials('cloudseals-github')
     }
 
     tools {
@@ -11,9 +10,10 @@ pipeline {
     }
 
     stages {
+
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/Naveenm04/cloudseals-frontend.git', credentialsId: "${GITHUB_CREDENTIALS}"
+                git url: 'https://github.com/Naveenm04/cloudseals-frontend.git'
             }
         }
 
@@ -31,7 +31,7 @@ pipeline {
                         -Dsonar.projectKey=frontend-pipeline \
                         -Dsonar.sources=src \
                         -Dsonar.host.url=http://34.100.218.206:9000 \
-                        -Dsonar.token=${SONAR_TOKEN}
+                        -Dsonar.token=$SONAR_TOKEN
                     """
                 }
             }
@@ -39,18 +39,17 @@ pipeline {
 
         stage('Build') {
             steps {
-                // Disable CI strict mode for eslint
                 sh 'CI=false npm run build'
             }
         }
     }
 
     post {
-        success {
-            echo '✅ Pipeline completed successfully.'
-        }
         failure {
             echo '❌ Pipeline failed.'
+        }
+        success {
+            echo '✅ Pipeline completed successfully.'
         }
     }
 }
