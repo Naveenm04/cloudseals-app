@@ -50,7 +50,6 @@ pipeline {
                     gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
                     gcloud config set project observability-459214
                     gsutil -m cp -r build/* gs://cloudseals-frontend-app
-                    gsutil iam ch allUsers:objectViewer gs://cloudseals-frontend-app
                 '''
             }
         }
