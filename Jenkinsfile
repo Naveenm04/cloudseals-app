@@ -1,13 +1,13 @@
 pipeline {
     agent any
 
-    environment {
-        SONARQUBE = 'SonarQube'
-        SONAR_SCANNER = tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+    tools {
+        nodejs 'NodeJS'
     }
 
-    tools {
-        nodejs 'NodeJS'  // Ensure you have a NodeJS tool configured with this name
+    environment {
+        SONAR_TOKEN = credentials('sonarqube-token')
+        SONAR_SCANNER = tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
     }
 
     stages {
@@ -25,10 +25,14 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
-                        sh "${SONAR_SCANNER}/bin/sonar-scanner -Dsonar.projectKey=frontend-pipeline -Dsonar.sources=src -Dsonar.host.url=http://34.100.218.206:9000 -Dsonar.token=$SONAR_TOKEN"
-                    }
+                withSonarQubeEnv('SonarScanner') {
+                    sh """
+                        ${SONAR_SCANNER}/bin/sonar-scanner \
+                        -Dsonar.projectKey=frontend-pipeline \
+                        -Dsonar.sources=src \
+                        -Dsonar.host.url=http://34.100.218.206:9000 \
+                        -Dsonar.token=${SONAR_TOKEN}
+                    """
                 }
             }
         }
@@ -42,10 +46,10 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline completed successfully'
+            echo '✅ Pipeline completed successfully.'
         }
         failure {
-            echo 'Pipeline failed'
+            echo '❌ Pipeline failed.'
         }
     }
 }
