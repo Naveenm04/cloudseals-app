@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'NodeJS' // Make sure "NodeJS" is configured in Jenkins Global Tools
+        nodejs 'NodeJS'
     }
 
     environment {
-        SONAR_TOKEN = credentials('sonarqube-token') // Secret Text credential ID
+        SONAR_TOKEN = credentials('sonarqube-token')
     }
 
     stages {
@@ -24,7 +24,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') { // Jenkins SonarQube server name
+                withSonarQubeEnv('SonarQube') {
                     sh '''
                         sonar-scanner \
                         -Dsonar.projectKey=frontend-pipeline \
@@ -45,20 +45,12 @@ pipeline {
 
     post {
         success {
-            slackSend(
-                channel: '#jenkins_mvp',
-                color: 'good',
-                message: "✅ Build SUCCESS: Job ${env.JOB_NAME} [#${env.BUILD_NUMBER}] - ${env.BUILD_URL}",
-                tokenCredentialId: 'slack-channel-secret'
-            )
+            slackSend(channel: '#jenkins_mvp', color: 'good',
+                message: "✅ Build SUCCESS: Job ${env.JOB_NAME} [#${env.BUILD_NUMBER}] - ${env.BUILD_URL}")
         }
         failure {
-            slackSend(
-                channel: '#jenkins_mvp',
-                color: 'danger',
-                message: "❌ Build FAILED: Job ${env.JOB_NAME} [#${env.BUILD_NUMBER}] - ${env.BUILD_URL}",
-                tokenCredentialId: 'slack-channel-secret'
-            )
+            slackSend(channel: '#jenkins_mvp', color: 'danger',
+                message: "❌ Build FAILED: Job ${env.JOB_NAME} [#${env.BUILD_NUMBER}] - ${env.BUILD_URL}")
         }
     }
 }
