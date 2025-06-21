@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'NodeJS'
+        nodejs 'NodeJS' // Make sure this is the correct label in Manage Jenkins > Global Tool Configuration
     }
 
     environment {
-        SONAR_TOKEN = credentials('sonarqube-token')
+        SONAR_TOKEN = credentials('sonarqube-token') // Jenkins credential ID
     }
 
     stages {
@@ -24,14 +24,14 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh """
+                withSonarQubeEnv('SonarQube') { // Must match Jenkins SonarQube config name
+                    sh '''
                         sonar-scanner \
                         -Dsonar.projectKey=frontend-pipeline \
                         -Dsonar.sources=src \
                         -Dsonar.host.url=http://34.100.218.206:9000 \
-                        -Dsonar.token=${SONAR_TOKEN}
-                    """
+                        -Dsonar.token=$SONAR_TOKEN
+                    '''
                 }
             }
         }
@@ -45,10 +45,20 @@ pipeline {
 
     post {
         success {
-            slackSend(channel: '#jenkins_mvp', color: 'good', message: "✅ Build SUCCESS: Job ${env.JOB_NAME} [#${env.BUILD_NUMBER}] - ${env.BUILD_URL}")
+            slackSend(
+                channel: '#jenkins_mvp',
+                color: 'good',
+                message: "✅ Build SUCCESS: Job ${env.JOB_NAME} [#${env.BUILD_NUMBER}] - ${env.BUILD_URL}",
+                tokenCredentialId: 'slack-channel-secret'
+            )
         }
         failure {
-            slackSend(channel: '#jenkins_mvp', color: 'danger', message: "❌ Build FAILED: Job ${env.JOB_NAME} [#${env.BUILD_NUMBER}] - ${env.BUILD_URL}")
+            slackSend(
+                channel: '#jenkins_mvp',
+                color: 'danger',
+                message: "❌ Build FAILED: Job ${env.JOB_NAME} [#${env.BUILD_NUMBER}] - ${env.BUILD_URL}",
+                tokenCredentialId: 'slack-channel-secret'
+            )
         }
     }
 }
