@@ -6,16 +6,13 @@ pipeline {
     }
 
     environment {
-        SONAR_TOKEN = credentials('SonarQube Token for cloudseals-frontend')
+        SONAR_TOKEN = credentials('sonarqube-token')
     }
 
     stages {
-
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                    credentialsId: 'cloudseals-github',
-                    url: 'https://github.com/Naveenm04/cloudseals-app.git'
+                git credentialsId: 'cloudseals-github', url: 'https://github.com/Naveenm04/cloudseals-app.git', branch: 'main'
             }
         }
 
@@ -41,17 +38,17 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'CI=false npm run build'
+                sh 'npm run build'
             }
         }
     }
 
     post {
-        success {
-            echo '✅ Build and SonarQube analysis successful!'
-        }
         failure {
             echo '❌ Pipeline failed.'
+        }
+        success {
+            echo '✅ Pipeline completed successfully.'
         }
     }
 }
