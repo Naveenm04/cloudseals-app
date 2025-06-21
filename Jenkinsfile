@@ -1,12 +1,13 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs 'NodeJS'
+    environment {
+        SONARQUBE = 'SonarQube'
+        SONAR_SCANNER = tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
     }
 
-    environment {
-        SONAR_TOKEN = credentials('sonarqube-token')
+    tools {
+        nodejs 'NodeJS'  // Ensure you have a NodeJS tool configured with this name
     }
 
     stages {
@@ -25,13 +26,9 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh """
-                        sonar-scanner \
-                        -Dsonar.projectKey=frontend-pipeline \
-                        -Dsonar.sources=src \
-                        -Dsonar.host.url=http://34.100.218.206:9000 \
-                        -Dsonar.token=${SONAR_TOKEN}
-                    """
+                    withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+                        sh "${SONAR_SCANNER}/bin/sonar-scanner -Dsonar.projectKey=frontend-pipeline -Dsonar.sources=src -Dsonar.host.url=http://34.100.218.206:9000 -Dsonar.token=$SONAR_TOKEN"
+                    }
                 }
             }
         }
@@ -45,10 +42,10 @@ pipeline {
 
     post {
         success {
-            slackSend(channel: '#devops-alerts', color: 'good', message: "✅ Build SUCCESS: Job ${env.JOB_NAME} [#${env.BUILD_NUMBER}] - ${env.BUILD_URL}")
+            echo 'Pipeline completed successfully'
         }
         failure {
-            slackSend(channel: '#devops-alerts', color: 'danger', message: "❌ Build FAILED: Job ${env.JOB_NAME} [#${env.BUILD_NUMBER}] - ${env.BUILD_URL}")
+            echo 'Pipeline failed'
         }
     }
 }
