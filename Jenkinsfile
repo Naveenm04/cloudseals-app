@@ -45,19 +45,19 @@ pipeline {
 
     post {
         success {
-            echo '✅ Pipeline succeeded.'
+            echo ' Pipeline succeeded.'
             slackSend (
                 channel: 'jenkins_mvp',
                 color: 'good',
-                message: "*Success:* `frontend-pipeline` completed successfully! ✅"
+                message: "*Success:* `frontend-pipeline` completed successfully! "
             )
         }
         failure {
-            echo '❌ Pipeline failed.'
+            echo ' Pipeline failed.'
             slackSend (
                 channel: 'jenkins_mvp',
                 color: 'danger',
-                message: "*Failure:* `frontend-pipeline` failed. ❌"
+                message: "*Failure:* `frontend-pipeline` failed. "
             )
         }
     }
