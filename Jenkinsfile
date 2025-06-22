@@ -2,9 +2,8 @@ pipeline {
     agent any
 
     environment {
-        SONAR_TOKEN                   = credentials('sonarqube-token')
-        SONAR_HOST_URL                = 'http://34.100.218.206:9000'
-        GIT_CREDENTIAL_ID             = 'cloudseals-github'
+        SONAR_TOKEN               = credentials('sonarqube-token')
+        GIT_CREDENTIAL_ID         = 'cloudseals-github'
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-key')
     }
 
@@ -29,35 +28,24 @@ pipeline {
 
         stage('Test & Coverage') {
             steps {
-                sh 'npm test -- --coverage || true'
-            }
-        }
-
-        stage('Initialize Sonar Project') {
-            steps {
-                // use --data to properly encode the space in "CloudSeals Frontend"
-                sh """
-                  curl -u ${SONAR_TOKEN}: \\
-                       -X POST \"${SONAR_HOST_URL}/api/projects/create\" \\
-                       --data \"project=cloudseals-frontend\" \\
-                       --data \"name=CloudSeals Frontend\" \\
-                       || true
-                """
+                sh 'npm test -- --coverage'
+                // ensure lcov.info exists for Sonar
             }
         }
 
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarScanner') {
+                    // install sonar-scanner if not globally available
                     sh 'npm install -g sonar-scanner'
                     sh '''
-                      sonar-scanner \
-                        -Dsonar.projectKey=cloudseals-frontend \
-                        -Dsonar.host.url=$SONAR_HOST_URL \
-                        -Dsonar.token=$SONAR_TOKEN \
-                        -Dsonar.sources=src \
-                        -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
-                        -Dsonar.exclusions=**/*.test.js,**/node_modules/**
+                        sonar-scanner \
+                          -Dsonar.projectKey=cloudseals-frontend \
+                          -Dsonar.sources=src \
+                          -Dsonar.host.url=$SONAR_HOST_URL \
+                          -Dsonar.login=$SONAR_TOKEN \
+                          -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
+                          -Dsonar.exclusions=**/*.test.js,**/node_modules/**
                     '''
                 }
             }
@@ -84,7 +72,10 @@ pipeline {
 
         stage('Deploy to GCP Bucket') {
             steps {
-                sh 'gsutil -m rsync -r build gs://cloudseals-frontend-app'
+                // assuming you have gsutil configured via GOOGLE_APPLICATION_CREDENTIALS
+                sh '''
+                   gsutil -m rsync -r build gs://cloudseals-frontend-app
+                '''
             }
         }
     }
