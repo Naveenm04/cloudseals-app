@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        SONAR_TOKEN = credentials('sonarqube-token') 
-        GIT_CREDENTIAL_ID = 'cloudseals-github' 
+        SONAR_TOKEN = credentials('sonarqube-token')
+        GIT_CREDENTIAL_ID = 'cloudseals-github'
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-key')
     }
 
@@ -27,13 +27,27 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarScanner') {
-                    sh """
+                    sh '''
                         /opt/sonar-scanner/bin/sonar-scanner \
                         -Dsonar.projectKey=frontend-pipeline \
                         -Dsonar.sources=src \
                         -Dsonar.host.url=http://34.100.218.206:9000 \
                         -Dsonar.token=${SONAR_TOKEN}
-                    """
+                    '''
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    script {
+                        sleep 20
+                        def qg = waitForQualityGate()
+                        if (qg.status != 'OK') {
+                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                        }
+                    }
                 }
             }
         }
@@ -41,6 +55,21 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'CI=false npm run build'
+            }
+        }
+
+        stage('Post Build Actions') {
+            parallel {
+                stage('Archive Artifacts') {
+                    steps {
+                        archiveArtifacts artifacts: 'build/**', fingerprint: true
+                    }
+                }
+                stage('Display Tree Structure') {
+                    steps {
+                        sh 'tree build'
+                    }
+                }
             }
         }
 
@@ -58,11 +87,22 @@ pipeline {
     }
 
     post {
+        always {
+            echo 'The pipeline is triggered. Please check the status in a matter of time.'
+        }
         success {
-            echo " Frontend Build & Deployment Successful"
+            script {
+                notify('good')
+            }
         }
         failure {
-            echo " Frontend Build Failed"
+            script {
+                notify('danger')
+            }
         }
     }
+}
+
+def notify(colour) {
+    slackSend color: colour, message: "Job ${env.JOB_NAME}, Build #${env.BUILD_NUMBER} finished with status: ${currentBuild.currentResult}\nCheck the console output at ${env.BUILD_URL}"
 }
