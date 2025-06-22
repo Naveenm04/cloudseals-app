@@ -59,10 +59,10 @@ pipeline {
 
     post {
         success {
-            echo "✅ Frontend Build & Deployment Successful"
+            echo " Frontend Build & Deployment Successful"
         }
         failure {
-            echo "❌ Frontend Build Failed"
+            echo " Frontend Build Failed"
         }
     }
 }
