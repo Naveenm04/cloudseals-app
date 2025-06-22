@@ -32,7 +32,7 @@ pipeline {
                         -Dsonar.projectKey=frontend-pipeline \
                         -Dsonar.sources=src \
                         -Dsonar.host.url=http://34.100.218.206:9000 \
-                        -Dsonar.token=${SONAR_TOKEN}
+                        -Dsonar.token=$SONAR_TOKEN
                     """
                 }
             }
@@ -46,23 +46,31 @@ pipeline {
 
         stage('Deploy to GCP Bucket') {
             steps {
-                withEnv(["GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}"]) {
-                    sh '''
-                        gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
-                        gcloud config set project observability-459214
-                        gsutil -m cp -r build/* gs://cloudseals-frontend-app
-                    '''
-                }
+                sh '''
+                    gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+                    gcloud config set project observability-459214
+                    gsutil -m cp -r build/* gs://cloudseals-frontend-app
+                '''
             }
         }
     }
 
     post {
         success {
-            echo " Frontend Build & Deployment Successful"
+            echo '✅ Pipeline succeeded.'
+            slackSend (
+                channel: 'jenkins_mvp',
+                color: 'good',
+                message: "*Success:* `frontend-pipeline` completed successfully!"
+            )
         }
         failure {
-            echo " Frontend Build Failed"
+            echo '❌ Pipeline failed.'
+            slackSend (
+                channel: 'jenkins_mvp',
+                color: 'danger',
+                message: "*Failure:* `frontend-pipeline` failed."
+            )
         }
     }
 }
