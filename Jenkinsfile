@@ -2,8 +2,9 @@ pipeline {
     agent any
 
     environment {
-        SONAR_TOKEN               = credentials('sonarqube-token')
-        GIT_CREDENTIAL_ID         = 'cloudseals-github'
+        SONAR_TOKEN                   = credentials('sonarqube-token')
+        SONAR_HOST_URL                = 'http://34.100.218.206:9000'
+        GIT_CREDENTIAL_ID             = 'cloudseals-github'
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-key')
     }
 
@@ -28,9 +29,19 @@ pipeline {
 
         stage('Test & Coverage') {
             steps {
-                // Run the existing tests (as-is), but always return exit code 0
-                // so that even if they fail, the pipeline continues and generates coverage.
+                // run tests but never abort build
                 sh 'npm test -- --coverage || true'
+            }
+        }
+
+        stage('Initialize Sonar Project') {
+            steps {
+                // create the project if it doesn't exist (requires Create Projects permission)
+                sh """
+                  curl -u ${SONAR_TOKEN}: \
+                    -X POST "${SONAR_HOST_URL}/api/projects/create?project=cloudseals-frontend&name=CloudSeals Frontend" \
+                    || true
+                """
             }
         }
 
@@ -39,13 +50,13 @@ pipeline {
                 withSonarQubeEnv('SonarScanner') {
                     sh 'npm install -g sonar-scanner'
                     sh '''
-                        sonar-scanner \
-                          -Dsonar.projectKey=cloudseals-frontend \
-                          -Dsonar.sources=src \
-                          -Dsonar.host.url=$SONAR_HOST_URL \
-                          -Dsonar.login=$SONAR_TOKEN \
-                          -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
-                          -Dsonar.exclusions=**/*.test.js,**/node_modules/**
+                      sonar-scanner \
+                        -Dsonar.projectKey=cloudseals-frontend \
+                        -Dsonar.host.url=$SONAR_HOST_URL \
+                        -Dsonar.token=$SONAR_TOKEN \
+                        -Dsonar.sources=src \
+                        -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
+                        -Dsonar.exclusions=**/*.test.js,**/node_modules/**
                     '''
                 }
             }
