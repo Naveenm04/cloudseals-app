@@ -20,7 +20,14 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                sh 'npm ci'
+            }
+        }
+
+        stage('Test & Coverage') {
+            steps {
+                // Run unit tests and generate an LCOV report
+                sh 'npm test -- --coverage'
             }
         }
 
@@ -31,8 +38,11 @@ pipeline {
                         /opt/sonar-scanner/bin/sonar-scanner \
                         -Dsonar.projectKey=frontend-pipeline \
                         -Dsonar.sources=src \
+                        -Dsonar.tests=src \
+                        -Dsonar.test.inclusions=src/**/*.spec.js \
+                        -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
                         -Dsonar.host.url=http://34.100.218.206:9000 \
-                        -Dsonar.token=${SONAR_TOKEN}
+                        -Dsonar.login=${SONAR_TOKEN}
                     '''
                 }
             }
@@ -88,21 +98,17 @@ pipeline {
 
     post {
         always {
-            echo 'The pipeline is triggered. Please check the status in a matter of time.'
+            echo 'Pipeline finished. Check SonarQube for metrics and GCP bucket for deployment.'
         }
         success {
-            script {
-                notify('good')
-            }
+            script { notify('good') }
         }
         failure {
-            script {
-                notify('danger')
-            }
+            script { notify('danger') }
         }
     }
 }
 
 def notify(colour) {
-    slackSend color: colour, message: "Job ${env.JOB_NAME}, Build #${env.BUILD_NUMBER} finished with status: ${currentBuild.currentResult}\nCheck the console output at ${env.BUILD_URL}"
+    slackSend color: colour, message: "Job ${env.JOB_NAME} Build #${env.BUILD_NUMBER} finished with status ${currentBuild.currentResult}"
 }
