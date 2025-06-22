@@ -29,18 +29,19 @@ pipeline {
 
         stage('Test & Coverage') {
             steps {
-                // run tests but never abort build
                 sh 'npm test -- --coverage || true'
             }
         }
 
         stage('Initialize Sonar Project') {
             steps {
-                // create the project if it doesn't exist (requires Create Projects permission)
+                // use --data to properly encode the space in "CloudSeals Frontend"
                 sh """
-                  curl -u ${SONAR_TOKEN}: \
-                    -X POST "${SONAR_HOST_URL}/api/projects/create?project=cloudseals-frontend&name=CloudSeals Frontend" \
-                    || true
+                  curl -u ${SONAR_TOKEN}: \\
+                       -X POST \"${SONAR_HOST_URL}/api/projects/create\" \\
+                       --data \"project=cloudseals-frontend\" \\
+                       --data \"name=CloudSeals Frontend\" \\
+                       || true
                 """
             }
         }
