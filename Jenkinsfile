@@ -38,6 +38,20 @@ pipeline {
             }
         }
 
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    script {
+                        sleep 20
+                        def qg = waitForQualityGate()
+                        if (qg.status != 'OK') {
+                            error " Pipeline aborted due to quality gate failure: ${qg.status}"
+                        }
+                    }
+                }
+            }
+        }
+
         stage('Build') {
             steps {
                 sh 'CI=false npm run build'
@@ -53,24 +67,39 @@ pipeline {
                 '''
             }
         }
+
+        stage('Post Build Actions') {
+            parallel {
+                stage('Display Tree Structure') {
+                    steps {
+                        sh 'tree .'
+                    }
+                }
+            }
+        }
     }
 
     post {
+        always {
+            echo 'The pipeline is triggered. Please check the status shortly.'
+        }
         success {
-            echo '✅ Pipeline succeeded.'
-            slackSend (
-                channel: 'jenkins_mvp',
-                color: 'good',
-                message: "*Success:* `frontend-pipeline` completed successfully!"
-            )
+            script {
+                notify('good')
+            }
         }
         failure {
-            echo '❌ Pipeline failed.'
-            slackSend (
-                channel: 'jenkins_mvp',
-                color: 'danger',
-                message: "*Failure:* `frontend-pipeline` failed."
-            )
+            script {
+                notify('danger')
+            }
         }
     }
+}
+
+def notify(colour) {
+    slackSend (
+        channel: 'jenkins_mvp',
+        color: colour,
+        message: "Job `${env.JOB_NAME}`, Build #${env.BUILD_NUMBER} finished with status: ${currentBuild.currentResult}.\n🔗 Console: ${env.BUILD_URL}"
+    )
 }
