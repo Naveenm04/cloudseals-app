@@ -2,39 +2,41 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import ThemeProvider from './context/ThemeContext';
-
 import SignUpForm from './components/Auth/SignUpForm';
 import SignInForm from './components/Auth/SignInForm';
-
 import MainHome from './pages/MainHome';
 import MainDashboard from './pages/MainDashboard';
 import Dashboard from './components/Dashboard';
 import DashboardOverview from './pages/DashboardOverview';
-
 import CloudResourcesNetwork from './components/CloudResourcesNetwork';
 import CloudResourcesCompute from './components/CloudResourcesCompute';
 import CloudResourcesStorage from './components/CloudResourcesStorage';
 import CloudResourcesDatabases from './components/CloudResourcesDatabases';
-
 import Storage from './components/Storage';
 import Network from './components/Network';
-
 import AiAgents from './components/AiAgents';
 import WorkflowsAutomations from './components/WorkflowsAutomations';
 import CostOptimization from './components/CostOptimization';
-import ComplianceSecurity from './components/ComplianceSecurity';
-
-import AgentOpsMonitoringHealth from './components/AgentOpsMonitoringHealth';
-import BiasFairnessAnalytics from './pages/BiasFairnessAnalytics';
-// import AgentOpsOrMonitoringHealth from './pages/AgentOpsOrMonitoringHealth';
-
-import AuditLogs from './pages/AuditLogs';
-import Settings from './pages/Settings';
-import UserManagement from './pages/UserManagement'; // ✅ Only ONE import here
-import OrgSettings from './pages/OrgSettings';
-import Billing from './pages/Billing';
+import ComplianceSecurity from './components/ComplianceSecurity/ComplianceSecurity';
+import BiasFairnessAnalytics from './components/BiasFairnessAnalytics/BiasFairnessAnalytics';
+import AgentOpsMonitoringHealth from './components/AgentOpsMonitoringHealth/AgentOpsMonitoringHealth';
+import AuditLogs from './components/AuditLogs/AuditLogs';
+import Settings from './components/Settings/Settings';
+import UserManagement from './components/Admin/UserManagement';
+import OrgSettings from './components/Admin/OrgSettings';
+import Billing from './components/Admin/Billing';
 import FeedbackSupport from './pages/FeedbackSupport';
 import DarkLightModeToggle from './pages/DarkLightModeToggle';
+// import Features from './pages/Features';
+// import Features from './pages/Features';
+// import Pricing from './pages/Pricing';
+// import Resources from './pages/Resources';
+// import Contact from './pages/Contact';
+// import ESG from './pages/solutions/ESG';
+// import Healthcare from './pages/solutions/Healthcare';
+// import BFSI from './pages/solutions/BFSI';
+// import Resources from './pages/Resources';
+
 
 function App() {
   return (
@@ -49,7 +51,17 @@ function App() {
           <Route path="/signin" element={<SignInForm />} />
           <Route path="/mainhome" element={<MainHome />} />
 
-          {/* Protected Routes under Dashboard Layout */}
+          {/* mainhome menus */}
+          {/* <Route path="/features" element={<Features />} />
+          <Route path="/pricing" element={<Pricing />} />
+<Route path="/resources" element={<Resources />} />
+<Route path="/contact" element={<Contact />} />
+<Route path="/solutions/esg" element={<ESG />} />
+<Route path="/solutions/healthcare" element={<Healthcare />} />
+<Route path="/solutions/bfsi" element={<BFSI />} /> */}
+{/* <Route path="/resources" element={<Resources />} /> */}
+
+
           <Route path="/" element={<MainDashboard />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="dashboard-overview" element={<DashboardOverview />} />

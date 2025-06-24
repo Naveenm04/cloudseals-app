@@ -1,16 +1,16 @@
+// src/components/DashboardOverview/Sidebar.jsx
 import React from 'react';
 import './DashboardOverview.css';
 
 const Sidebar = () => (
-  <nav className="sidebar">
+  <aside className="dashboard-sidebar">
     <ul>
-      <li>Overview</li>
+      <li>Home</li>
       <li>Resources</li>
-      <li>Agents</li>
       <li>Reports</li>
       <li>Settings</li>
     </ul>
-  </nav>
+  </aside>
 );
 
 export default Sidebar;

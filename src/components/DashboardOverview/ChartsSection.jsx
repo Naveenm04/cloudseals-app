@@ -1,11 +1,18 @@
+// src/components/DashboardOverview/ChartSection.jsx
 import React from 'react';
 import './DashboardOverview.css';
 
-const ChartsSection = () => (
-  <div className="charts-section">
-    <h3>Visualization</h3>
-    <div className="chart-placeholder">[Charts / Graphs go here]</div>
+const ChartSection = () => (
+  <div className="visualization">
+    <div className="chart-box">
+      <h3>Cost Over Time</h3>
+      <div className="chart-placeholder">[Chart Placeholder]</div>
+    </div>
+    <div className="chart-box">
+      <h3>Compliance Trends</h3>
+      <div className="chart-placeholder">[Chart Placeholder]</div>
+    </div>
   </div>
 );
 
-export default ChartsSection;
+export default ChartSection;

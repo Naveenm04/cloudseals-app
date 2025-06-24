@@ -1,0 +1,31 @@
+.agentops-container {
+  padding: 30px;
+  background-color: #f5f8fa;
+  border-radius: 14px;
+  max-width: 900px;
+  margin: 40px auto;
+  font-family: 'Segoe UI', sans-serif;
+  width:70vw;
+}
+
+.agentops-section {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.agentops-section h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #2e3c4e;
+  margin-bottom: 10px;
+}
+
+.agentops-section p {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
+}

@@ -1,63 +1,63 @@
-/* Set a modern background and center everything */
+/* Base Layout */
 body {
   background-color: #f0f4f8;
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Container */
 .auth-container {
   max-width: 400px;
   margin: 60px auto;
   padding: 30px 25px;
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   text-align: center;
 }
 
+/* Logo */
 .auth-logo {
-  width: 150px;
+  width: 140px;
   margin-bottom: 25px;
 }
 
+/* Form Inputs */
 .auth-form input {
   width: 100%;
   padding: 12px;
   margin: 10px 0;
   font-size: 14px;
-  border: 1px solid #ccc;
+  border: 1px solid #d1d5db;
   border-radius: 8px;
   box-sizing: border-box;
 }
 
+/* Auth Button */
 .auth-button {
-  background-color: #121364;
-  color: white;
+  background-color: #3b2475;
+  color: #ffffff;
   padding: 12px;
   width: 100%;
+  font-weight: bold;
   border: none;
+  border-radius: 8px;
   margin-top: 15px;
   cursor: pointer;
-  font-weight: bold;
-  border-radius: 8px;
   transition: background-color 0.3s ease;
 }
 
 .auth-button:hover {
-  background-color: #3596cb;
+  background-color: #4e38a1;
 }
 
-.note {
-  font-size: 13px;
-  color: #666;
-  margin-top: 10px;
-}
-
+/* Text Notes */
+.note,
 .policy-text,
 .switch-auth {
-  font-size: 12px;
-  margin-top: 15px;
-  color: #444;
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 12px;
 }
 
 .policy-text a,
@@ -71,13 +71,13 @@ body {
   text-decoration: underline;
 }
 
+/* Password Input Wrapper */
 .password-input-wrapper {
   position: relative;
   margin: 10px 0;
 }
 
 .password-input-wrapper input {
-  width: 100%;
   padding-right: 40px;
 }
 
@@ -92,93 +92,76 @@ body {
   font-size: 16px;
 }
 
+/* Error & Success Messages */
+.auth-error {
+  color: #dc2626;
+  background-color: #fee2e2;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.auth-success {
+  color: #15803d;
+  background-color: #d1fae5;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+/* Social Sign-In Section */
 .social-signin {
-  margin-top: 30px;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.social-text {
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #374151;
 }
 
 .social-buttons {
   display: flex;
-  justify-content: space-around;
-  margin-top: 15px;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
-.google-btn,
-.microsoft-btn {
-  flex: 1;
-  padding: 10px;
-  margin: 0 5px;
-  font-weight: bold;
-  cursor: pointer;
+/* Social Buttons */
+.btn-social {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  padding: 0.6rem 1.2rem;
   border-radius: 8px;
-  border: none;
-  background-color: #e5e5e5;
-  transition: background-color 0.3s ease;
-}
-
-.google-btn:hover,
-.microsoft-btn:hover {
-  background-color: #d4d4d4;
-}
-/* new css */
-.auth-container {
-  background: white;
-  padding: 2rem;
-  border-radius: 10px;
-  max-width: 400px;
-  margin: auto;
-  text-align: center;
-}
-
-.auth-button {
-  background-color: #3166e8;
-  color: white;
-  padding: 10px 20px;
-  margin-top: 1rem;
-  border: none;
-  border-radius: 5px;
   cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
 }
 
-/* new css */
-
-.auth-container {
-  max-width: 400px;
-  margin: 40px auto;
-  padding: 24px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+.btn-social:hover {
+  background-color: #e5e7eb;
 }
 
-.auth-form input {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.btn-social img {
+  width: 18px;
+  height: 18px;
 }
 
-.auth-button {
-  width: 100%;
-  padding: 12px;
-  background-color: #3b2475;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.btn-social.google {
+  color: #ea4335;
 }
 
-.note, .policy-text, .switch-auth {
-  font-size: 0.9rem;
-  color: #555;
-  margin-top: 12px;
+.btn-social.microsoft {
+  color: #2b579a;
 }
 
-/* .policy-text a, .switch-auth a {
-  color: ##3166e8;
-  text-decoration: none;
-} */
-/* Auth.css */
+/* Modal (Optional Usage) */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -210,43 +193,3 @@ body {
   font-size: 1.5rem;
   cursor: pointer;
 }
-/* new css */
-
-.form-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
-}
-
-.form-box {
-  width: 400px;
-  background: #fff;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.form-logo {
-  width: 60px;
-  margin-bottom: 10px;
-}
-
-input {
-  width: 100%;
-  padding: 10px;
-  margin: 12px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.submit-button {
-  width: 100%;
-  padding: 10px;
-  background: #4b0082;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-

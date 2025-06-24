@@ -1,17 +1,214 @@
-/* src/styles/MainHome.css */
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #10b981;
+  --accent-color: #f97316;
+  --text-dark: #1f2937;
+  --text-gray: #4b5563;
+  --bg-light: #f9fafb;
+  --bg-section: #f3f4f6;
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s ease-in-out;
+  --radius: 10px;
+  --font-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
 .main-home-wrapper {
+  background-color: var(--bg-light);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: var(--font-base);
+  overflow-x: hidden;
+}
+
+/* ---------------- Hero Section ---------------- */
+
+.main-home-hero {
+  padding: 5rem 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
+  border-bottom: 1px solid #e5e7eb;
+  position: relative;
+}
+
+.main-home-hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+
+.main-home-hero p {
+  font-size: 1.25rem;
+  color: var(--text-gray);
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.main-home-buttons {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+/* ---------------- Buttons ---------------- */
+
+.btn-primary,
+.btn-secondary,
+.btn-accent {
+  padding: 0.8rem 1.9rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: none;
+  transition: var(--transition);
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #1e40af;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #047857;
+  transform: scale(1.03);
+}
+
+.btn-accent {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.btn-accent:hover {
+  background-color: #ea580c;
+  transform: scale(1.03);
+}
+
+/* ---------------- Feature Section ---------------- */
+
+.main-home-features {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  padding: 4rem 2rem;
+  background-color: #ffffff;
+}
+
+.feature-card {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
   padding: 2rem;
+  width: 100%;
+  max-width: 280px;
+  text-align: center;
+  transition: var(--transition);
+  border: 1px solid #e5e7eb;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  border-color: var(--primary-color);
+}
+
+.feature-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-top: 1rem;
+}
+
+.feature-card p {
+  color: var(--text-gray);
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+/* ---------------- Trust Bar ---------------- */
+
+.trust-bar {
+  background: linear-gradient(to right, #3b82f6, #1d4ed8);
+  padding: 3.5rem 1rem;
+  color: white;
   text-align: center;
 }
 
-.main-home-wrapper h1 {
-  font-size: 2rem;
-  color: #1f2937;
+.trust-bar h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
 }
 
-.main-home-wrapper p {
-  font-size: 1.1rem;
-  margin-top: 0.5rem;
-  color: #4b5563;
+.trust-logos {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  filter: grayscale(1) opacity(0.85);
+}
+
+/* ---------------- Footer ---------------- */
+
+.footer {
+  background-color: #1e3a8a;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #d1d5db;
+  border-top: 1px solid #e5e7eb;
+}
+
+.footer a {
+  color: #d1d5db;
+  margin: 0 0.5rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: var(--accent-color);
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (max-width: 768px) {
+  .main-home-hero h1 {
+    font-size: 2rem;
+  }
+
+  .main-home-hero p {
+    font-size: 1.05rem;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-accent {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .feature-card {
+    max-width: 100%;
+  }
+
+  .trust-bar h2 {
+    font-size: 1.1rem;
+  }
 }

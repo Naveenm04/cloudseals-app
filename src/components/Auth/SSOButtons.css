@@ -1,0 +1,46 @@
+.sso-buttons-container {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.sso-label {
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  color: #374151;
+}
+
+.sso-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.sso-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #f9fafb;
+  border: 1px solid #d1d5db;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.sso-btn:hover {
+  background-color: #f3f4f6;
+}
+
+.sso-btn img {
+  height: 18px;
+  width: 18px;
+}
+
+.sso-btn.google {
+  color: #ea4335;
+}
+
+.sso-btn.microsoft {
+  color: #2b579a;
+}

@@ -1,0 +1,30 @@
+.bias-analytics {
+  padding: 32px;
+  background-color: #f3f6f9;
+  border-radius: 16px;
+  max-width: 900px;
+  margin: 40px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.report-section {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 24px;
+  margin-top: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.report-section h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2f3e4e;
+  margin-bottom: 10px;
+}
+
+.report-section p {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+}

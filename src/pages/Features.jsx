@@ -14,12 +14,6 @@ const MainHome = () => {
   return (
     <div className="main-home-wrapper">
       <Navbar />
-      <HeroSection />
-      {/* 🔽 Add ID for scroll-to-anchor functionality */}
-      <div id="features">
-        <FeaturesSection />
-      </div>
-      <TrustBar />
       <Footer />
     </div>
   );

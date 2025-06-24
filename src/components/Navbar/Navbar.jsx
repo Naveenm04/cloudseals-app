@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -8,26 +8,26 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <div className="navbar-logo" onClick={() => navigate('/')}>
+      <div className="navbar-logo" onClick={() => navigate('/mainhome')}>
         CloudSeals
       </div>
 
       <div className={`navbar-links ${isMobileMenuOpen ? 'open' : ''}`}>
-        <a onClick={() => navigate('/')}>Home</a>
-        <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
+        <Link to="/mainhome">Home</Link>
+        <Link to="/features">Features</Link>
+        <Link to="/pricing">Pricing</Link>
 
         <div className="dropdown">
           <button className="dropbtn">Solutions ▾</button>
           <div className="dropdown-content">
-            <a href="#esg">ESG</a>
-            <a href="#healthcare">Healthcare</a>
-            <a href="#bfsi">BFSI</a>
+            <Link to="/solutions/esg">ESG</Link>
+            <Link to="/solutions/healthcare">Healthcare</Link>
+            <Link to="/solutions/bfsi">BFSI</Link>
           </div>
         </div>
 
-        <a href="#resources">Resources</a>
-        <a href="#contact">Contact</a>
+        <Link to="/resources">Resources</Link>
+        <Link to="/contact">Contact</Link>
 
         <button className="btn register" onClick={() => navigate('/signup')}>Register</button>
         <button className="btn login" onClick={() => navigate('/signin')}>Login</button>
