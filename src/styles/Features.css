@@ -1,0 +1,92 @@
+/* src/styles/Features.css */
+
+:root {
+  --primary-color: #2563eb;
+  --text-dark: #1f2937;
+  --text-gray: #4b5563;
+  --bg-light: #f9fafb;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --card-hover-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  --radius: 10px;
+  --font-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.features-page {
+  background-color: var(--bg-light);
+  min-height: 100vh;
+  font-family: var(--font-base);
+  padding: 4rem 2rem;
+}
+
+.features-heading {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--text-dark);
+  font-weight: 800;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.features-heading::after {
+  content: "";
+  display: block;
+  height: 3px;
+  width: 60px;
+  background-color: var(--primary-color);
+  margin: 0.75rem auto 0;
+  border-radius: 4px;
+}
+
+.features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.feature-item {
+  background: #ffffff;
+  border-radius: var(--radius);
+  padding: 2rem;
+  max-width: 280px;
+  text-align: center;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e5e7eb;
+  flex: 1 1 260px;
+}
+
+.feature-item:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--card-hover-shadow);
+  border-color: var(--primary-color);
+}
+
+.feature-item h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+}
+
+.feature-item p {
+  color: var(--text-gray);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .features-page {
+    padding: 3rem 1.5rem;
+  }
+
+  .features-heading {
+    font-size: 2rem;
+  }
+
+  .feature-item {
+    max-width: 100%;
+    padding: 1.5rem;
+  }
+}
