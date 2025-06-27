@@ -11,3 +11,12 @@ code {
   font-family: 'Poppins', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+body[data-theme='dark'] {
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
+body[data-theme='light'] {
+  background-color: #ffffff;
+  color: #1e293b;
+}

@@ -5,13 +5,17 @@
   padding: 1rem 2rem;
   background-color: #1f2937;
   color: white;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-logo {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 2rem;
+  font-weight: 800;
   cursor: pointer;
+  color: #ffffff;
 }
 
 .navbar-links {
@@ -23,9 +27,29 @@
 .navbar-links a {
   color: white;
   text-decoration: none;
-  cursor: pointer;
+  position: relative;
+  padding: 5px;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
+.navbar-links a:hover,
+.navbar-links .active {
+  color: #60a5fa;
+}
+
+.navbar-links .active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background-color: #60a5fa;
+  border-radius: 2px;
+}
+
+/* Dropdown */
 .dropdown {
   position: relative;
 }
@@ -35,34 +59,54 @@
   border: none;
   color: white;
   cursor: pointer;
+  font-weight: 500;
+  /* padding: 5px; */
+  /* font-family: poppins; */
 }
 
 .dropdown-content {
-  display: none;
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(10px);
   position: absolute;
   background-color: white;
-  min-width: 150px;
+  min-width: 220px;
   box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-  z-index: 1;
+  z-index: 999;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+  padding: 0.5rem 0;
 }
 
 .dropdown-content a {
   color: black;
-  padding: 10px 14px;
+  padding: 10px 16px;
   text-decoration: none;
   display: block;
+  transition: background 0.2s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: #f3f4f6;
+  color: #2563eb;
 }
 
 .dropdown:hover .dropdown-content {
-  display: block;
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0px);
 }
 
+/* Buttons */
 .btn {
   padding: 0.4rem 1rem;
   border: none;
   border-radius: 6px;
   margin-left: 0.5rem;
   cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
 }
 
 .register {
@@ -70,15 +114,25 @@
   color: white;
 }
 
+.register:hover {
+  background-color: #2563eb;
+}
+
 .login {
   background-color: #10b981;
   color: white;
 }
 
+.login:hover {
+  background-color: #059669;
+}
+
+/* Mobile Styles */
 .hamburger {
   display: none;
   font-size: 1.5rem;
   cursor: pointer;
+  color: white;
 }
 
 @media screen and (max-width: 768px) {
@@ -99,5 +153,42 @@
 
   .hamburger {
     display: block;
+  }
+
+  .dropdown-content {
+    position: static;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .dropdown-content a {
+    color: white;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #374151;
+  }
+}
+/* Call-to-Action shared hover animation */
+.cta-btn {
+  transition: all 0.3s ease-in-out;
+  transform: translateY(0);
+}
+
+.cta-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* Optional bounce keyframes (for extra effect) */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
   }
 }

@@ -16,7 +16,7 @@ const MainHome = () => {
       <Navbar />
       <HeroSection />
       {/* 🔽 Add ID for scroll-to-anchor functionality */}
-      <div id="features">
+      <div id="">
         <FeaturesSection />
       </div>
       <TrustBar />

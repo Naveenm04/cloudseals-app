@@ -7,7 +7,7 @@ import TrustBar from '../../components/TrustBar/TrustBar';
 import Footer from '../../components/Footer/Footer';
 import '../../styles/MainHome.css';
 
-const BFSI = () => {
+const CloudSealsDevPredict = () => {
   const navigate = useNavigate();
 
   return (
@@ -21,4 +21,4 @@ const BFSI = () => {
   );
 };
 
-export default BFSI;
+export default CloudSealsDevPredict;
