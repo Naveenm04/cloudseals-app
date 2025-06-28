@@ -27,15 +27,14 @@ import OrgSettings from './components/Admin/OrgSettings';
 import Billing from './components/Admin/Billing';
 import FeedbackSupport from './pages/FeedbackSupport';
 import DarkLightModeToggle from './pages/DarkLightModeToggle';
-// import Features from './pages/Features';
-// import Features from './pages/Features';
-// import Pricing from './pages/Pricing';
-// import Resources from './pages/Resources';
-// import Contact from './pages/Contact';
-// import ESG from './pages/solutions/ESG';
-// import Healthcare from './pages/solutions/Healthcare';
-// import BFSI from './pages/solutions/BFSI';
-// import Resources from './pages/Resources';
+import Features from './pages/Features';
+import Pricing from './pages/Pricing';
+import Resources from './pages/Resources';
+import Contact from './pages/Contact';
+import CloudSealsSecureGuard from './pages/solutions/CloudSealsSecureGuard';
+import CloudSealsDevPredict from './pages/solutions/CloudSealsDevPredict';
+import CloudsealsFinOptimize from './pages/solutions/CloudsealsFinOptimize';
+import GuardianEyebyCloudSeals from './pages/solutions/GuardianEyebyCloudSeals';
 
 
 function App() {
@@ -52,14 +51,15 @@ function App() {
           <Route path="/mainhome" element={<MainHome />} />
 
           {/* mainhome menus */}
-          {/* <Route path="/features" element={<Features />} />
+          <Route path="/features" element={<Features />} />
           <Route path="/pricing" element={<Pricing />} />
-<Route path="/resources" element={<Resources />} />
-<Route path="/contact" element={<Contact />} />
-<Route path="/solutions/esg" element={<ESG />} />
-<Route path="/solutions/healthcare" element={<Healthcare />} />
-<Route path="/solutions/bfsi" element={<BFSI />} /> */}
-{/* <Route path="/resources" element={<Resources />} /> */}
+          <Route path="/resources" element={<Resources />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/solutions/cloudseals-dev-predict" element={<CloudSealsDevPredict />} />
+          <Route path="/solutions/cloudseals-fin-optimize" element={<CloudsealsFinOptimize />} />
+          <Route path="/solutions/cloudseals-secure-guard" element={<CloudSealsSecureGuard />} />
+          <Route path="/solutions/guardianeye-by-cloudseals" element={<GuardianEyebyCloudSeals />} />
+          <Route path="/resources" element={<Resources />} />
 
 
           <Route path="/" element={<MainDashboard />}>

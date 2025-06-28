@@ -1,33 +1,39 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   return (
     <nav className="navbar">
       <div className="navbar-logo" onClick={() => navigate('/mainhome')}>
-        CloudSeals
+        <strong>CloudSeals</strong>
       </div>
 
       <div className={`navbar-links ${isMobileMenuOpen ? 'open' : ''}`}>
-        <Link to="/mainhome">Home</Link>
-        <Link to="/features">Features</Link>
-        <Link to="/pricing">Pricing</Link>
+        <NavLink to="/mainhome" activeclassname="active">Home</NavLink>
+        <NavLink to="/features" activeclassname="active">Features</NavLink>
+        <NavLink to="/pricing" activeclassname="active">Pricing</NavLink>
 
-        <div className="dropdown">
+        <div
+          className="dropdown"
+          onMouseEnter={() => setIsDropdownOpen(true)}
+          onMouseLeave={() => setIsDropdownOpen(false)}
+        >
           <button className="dropbtn">Solutions ▾</button>
-          <div className="dropdown-content">
-            <Link to="/solutions/esg">ESG</Link>
-            <Link to="/solutions/healthcare">Healthcare</Link>
-            <Link to="/solutions/bfsi">BFSI</Link>
+          <div className={`dropdown-content ${isDropdownOpen ? 'show' : ''}`}>
+            <NavLink to="/solutions/cloudseals-fin-optimize">Cloudseals FinOptimize</NavLink>
+            <NavLink to="/solutions/cloudseals-secure-guard">CloudSeals SecureGuard</NavLink>
+            <NavLink to="/solutions/cloudseals-dev-predict">CloudSeals DevPredict</NavLink>
+            <NavLink to="/solutions/guardianeye-by-cloudseals">GuardianEye by CloudSeals</NavLink>
           </div>
         </div>
 
-        <Link to="/resources">Resources</Link>
-        <Link to="/contact">Contact</Link>
+        <NavLink to="/resources" activeclassname="active">Resources</NavLink>
+        <NavLink to="/contact" activeclassname="active">Contact</NavLink>
 
         <button className="btn register" onClick={() => navigate('/signup')}>Register</button>
         <button className="btn login" onClick={() => navigate('/signin')}>Login</button>

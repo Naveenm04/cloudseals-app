@@ -1,14 +1,14 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// Create the context
 const ThemeContext = createContext();
 
-// ThemeProvider component
 const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+  const [theme, setTheme] = useState(() =>
+    localStorage.getItem('theme') || 'light'
+  );
 
   useEffect(() => {
-    document.body.className = theme;
+    document.body.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }, [theme]);
 
@@ -23,7 +23,6 @@ const ThemeProvider = ({ children }) => {
   );
 };
 
-// Custom hook
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (!context) {
@@ -32,5 +31,4 @@ export const useTheme = () => {
   return context;
 };
 
-// Default export
 export default ThemeProvider;
